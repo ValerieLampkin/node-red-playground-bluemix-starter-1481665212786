@@ -11,6 +11,7 @@
         "body-parser": "*",
         "cookie-parser": "*",
         "node-red": "0.x",
+        "adm-zip": "*",
         "cf-deployment-tracker-client": "*",
         "node-red-node-cf-cloudant" : "*" 
     },
