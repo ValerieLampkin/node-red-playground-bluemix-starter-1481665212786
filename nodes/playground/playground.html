@@ -59,7 +59,8 @@
         <input id="node-input-outputs" style="width: 60px;" value="1">
     </div>
     <div class="form-row">
-        <input id="node-button-preview" style="width: 100%;" value="Preview" type="button">
+        <input id="node-button-preview" style="width: 45%;" value="Preview" type="button">
+        <input id="node-button-download" style="width: 45%; float: right" value="Download" type="button">
     </div>
     <div class="form-row">
         <textarea id="node-input-previewarea" wrap="off" style="width: 100%; height: 100px; font-family:monospace;"></textarea>
@@ -272,6 +273,8 @@ public class Snippet extends SuperGluev2 {
                 }
             });
 
+            $(".editor-tray-body-wrapper").height($(window).height()-160);
+
             function initRoot() {
                 var root = RED.settings.httpNodeRoot;
                 if (root.slice(-1) == "/")
@@ -340,6 +343,7 @@ public class Snippet extends SuperGluev2 {
             }
 
             $("#node-button-preview").on('click', preview);
+            $("#node-button-download").on('click', download);
 
             function preview() {
                 var editor = ace.edit("node-input-code-editor");
@@ -399,6 +403,56 @@ public class Snippet extends SuperGluev2 {
                         if (jqXHR.status == 404)
                             $previewArea.val("Error:\n\nYou have to deploy first before previewing.");
                     })
+                }
+            }
+
+            function download() {
+                var editor = ace.edit("node-input-code-editor");
+                var code = editor.getValue();
+        
+                if (code != "") {
+                    var mode = $("#node-input-mode").val();
+                    var language = mode || "node";
+                    var $previewArea = $("#node-input-previewarea");
+                    var $params = $("#node-input-param-container li");            
+                    var params = {};
+                    $params.each(function(i) {
+                        var key = $(this).find(".node-input-param-key").val();
+                        var value = $(this).find(".node-input-param-value").val();
+                        params[key] = value;        
+                    })
+        
+                    var data = {
+                        'name': $("#node-input-name").val(),
+                        'mode': language
+                    };
+                    if (language == "node") {
+                        var paramLines      = "var parameters = " + JSON.stringify(params) + ";\r\n\r\n";
+                        var nodeEnd         = $("#playground-default .node-end").text();
+                        data.code = paramLines + code + nodeEnd;
+                    } else if (language == "java") {
+                        var jarLines        = "//jar@" + $("#node-input-jars").val() + "\n\n";
+                        var javaImports     = $("#playground-default .java-imports").text();
+                        var javaImportsMore = $("#node-input-import-editor").val();
+                        var javaStart       = $("#playground-default .java-start").text();
+                        var javaEnd         = $("#playground-default .java-end").text();
+                        var paramLines      = "    public String parameters = \"" + JSON.stringify(params).replace(/\"/g, "'") + "\";\n\n";
+                        data.code = jarLines + javaImports + javaImportsMore + javaStart + paramLines + code + javaEnd;
+                    }
+                    //console.log(data.code);
+        
+                    var root = RED.settings.httpNodeRoot;
+                    if (root == "/") root = "";
+
+                    var $form = $("<form>");
+                    $form.attr("action", root + "/playground_download").attr("method", "POST").attr("target", "_blank");
+                    for (var i in data) {
+                        if (i == "code") 
+                            $form.append($("<textarea>").attr("name", i).val(data[i]));
+                        else
+                            $form.append($("<input>").attr("name", i).val(data[i]));
+                    }
+                    $form.submit();
                 }
             }
         },
