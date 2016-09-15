@@ -273,12 +273,14 @@ public class Snippet extends SuperGluev2 {
                 }
             });
 
-            $(".editor-tray-body-wrapper").height($(window).height()-160);
-
+            
             function initRoot() {
-                var root = RED.settings.httpNodeRoot;
+                var root = RED.settings.httpNodeRoot || "";
                 if (root.slice(-1) == "/")
                     root = root.slice(0,-1);
+
+                if (root == "/" || root == ".")
+                    root = "";
 
                 if (root == "") {
                     $("#node-input-tip").hide();
@@ -341,6 +343,10 @@ public class Snippet extends SuperGluev2 {
                 var param = this.params[i];
                 $("#node-input-param-container").editableList('addItem',param);
             }
+
+            setTimeout(function() {
+                $(".editor-tray-body-wrapper").height($(window).height()-160);
+            }, 1000);
 
             $("#node-button-preview").on('click', preview);
             $("#node-button-download").on('click', download);
