@@ -1,0 +1,12 @@
+{
+  "name": "{{name}}",
+  "version": "0.1.0",
+  "dependencies": {
+    "express": "4.13.4",
+    "body-parser": "1.15.0",
+    "http": "*",
+    "path": "*",
+    "dynamic-routes": "*",
+    "forms": "*"    
+  }
+}

@@ -1,0 +1,26 @@
+.field label {
+	width: 15%;
+	padding: 10px;
+	display: inline-block;
+	text-align: right;
+}
+
+.field input {
+	width: 70%;
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.field {
+	margin-top: 5px;
+}
+
+button {
+	width: 90%;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	border: 1px solid black;
+}
