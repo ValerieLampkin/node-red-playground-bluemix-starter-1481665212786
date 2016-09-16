@@ -275,19 +275,23 @@ public class Snippet extends SuperGluev2 {
 
             
             function initRoot() {
-                var root = RED.settings.httpNodeRoot || "";
-                if (root.slice(-1) == "/")
-                    root = root.slice(0,-1);
-
-                if (root == "/" || root == ".")
-                    root = "";
-
+                var root = getRoot();
+                
                 if (root == "") {
                     $("#node-input-tip").hide();
                 } else {
                     $("#node-input-path").html(root);
                     $("#node-input-tip").show();
                 }
+            }
+            
+            function getRoot() {
+            	var root = RED.settings.httpNodeRoot || "";
+
+                if (root == "/" || root == ".")
+                    root = "";
+                    
+                return root;
             }
 
             function initJavaMode() {
@@ -386,8 +390,8 @@ public class Snippet extends SuperGluev2 {
                     }
                     //console.log(data.code);
         
-                    var root = RED.settings.httpNodeRoot;
-                    if (root == "/") root = "";
+                    var root = getRoot();
+
                     $previewArea.val("Your code is being processed...");
                     $.ajax({
                         type: "POST",
@@ -447,8 +451,7 @@ public class Snippet extends SuperGluev2 {
                     }
                     //console.log(data.code);
         
-                    var root = RED.settings.httpNodeRoot;
-                    if (root == "/") root = "";
+                    var root = getRoot();
 
                     var $form = $("<form>");
                     $form.attr("action", root + "/playground_download").attr("method", "POST").attr("target", "_blank");
