@@ -20,7 +20,7 @@ RED.init(server,settings);
 app.use(settings.httpAdminRoot, RED.httpAdmin);
 
 //Serve the http nodes UI from /api
-//app.use(settings.httpNodeRoot,RED.httpNode);
+app.use(settings.httpNodeRoot || "",RED.httpNode);
 
 //Add a simple route for static content served from 'public'
 app.use("/",express.static("public"));
