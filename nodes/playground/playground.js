@@ -1,3 +1,4 @@
+/*eslint-env node, querystring*/
 /**
  * Copyright 2014 IBM Corp.
  *
@@ -21,11 +22,11 @@ module.exports = function(RED) {
     var jsonParser = bodyParser.json();
     var urlencParser = bodyParser.urlencoded({extended:true});
 
-    var http = require('http');
+    var http = require("http");
     var querystring = require('querystring');
 
-    var fs = require('fs');
-    var AdmZip = require('adm-zip');
+    var fs = require("fs");
+    var AdmZip = require("adm-zip");
 
     var nodeEnd = "\n\n\
 if (require.main === module) {      \
@@ -107,9 +108,9 @@ public class Snippet extends SuperGluev2 {  \
 
     function execute(host, mode, code, cb) {
         if (code != "") {
-            host = host || 'cloudsandbox.mybluemix.net';
+            host = host || "cloudsandbox.mybluemix.net";
             host = host.replace("http://", "");
-            if (host == "") host = 'cloudsandbox.mybluemix.net';
+            if (host == "") host = "cloudsandbox.mybluemix.net";
             
             var post_data = querystring.stringify({
                 'code': code,
@@ -171,79 +172,71 @@ public class Snippet extends SuperGluev2 {  \
     }
 
     function downloadNode(name, code, cb) {
-        if (code != "") {
-            var folder = "../package-templates/node/";
-            name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
-            var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
-            var package_json     = fs.readFileSync(folder + 'package.json','utf8');
-            var src_snippet_js   = code;
-            var packageJson = JSON.parse(package_json);
-            packageJson.name = name;
+        var folder = process.env.HOME + "/package-templates/node/";
+        name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
+        var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
+        var package_json     = fs.readFileSync(folder + 'package.json','utf8');
+        var src_snippet_js   = code;
+        var packageJson = JSON.parse(package_json);
+        packageJson.name = name;
 
-            var codePackages = code.split("require(");
-            if (codePackages.length > 1) {
-                for (var i in codePackages) {
-                    if (i == 0) continue;
-                    var package_ = codePackages[i].substring(0,codePackages[i].indexOf(")")).replace(/\"/g,"").replace(/\'/g,"");
-                    if (package_ != "" && package_ != "../lib/superglue.js") {
-                        if (typeof packageJson.dependencies[package_] == "undefined")
-                            packageJson.dependencies[package_] = "*";
-                    }
+        var codePackages = code.split("require(");
+        if (codePackages.length > 1) {
+            for (var i in codePackages) {
+                if (i == 0) continue;
+                var package_ = codePackages[i].substring(0,codePackages[i].indexOf(")")).replace(/\"/g,"").replace(/\'/g,"");
+                if (package_ != "" && package_ != "../lib/superglue.js") {
+                    if (typeof packageJson.dependencies[package_] == "undefined")
+                        packageJson.dependencies[package_] = "*";
                 }
             }
-            package_json = JSON.stringify(packageJson, null, 4);
-
-            manifest_yml = manifest_yml.replace(/{{name}}/g, name);
-
-            var zip = new AdmZip();
-            zip.addLocalFile("app.js", "app.js");
-            zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
-            zip.addFile("package.json", new Buffer(package_json), "package.json");
-            zip.addLocalFile(folder + "/README.txt", "");
-            zip.addLocalFile(folder + "/lib/superglue.js", "lib");
-            zip.addLocalFile(folder + "/public/style.css", "public");
-            zip.addFile("src/snippet.js", new Buffer(src_snippet_js), "snippet.js");
-
-            cb({
-                err : "",
-                out : {
-                    zip : zip.toBuffer(),
-                    name : name
-                }
-            });
-        } else {
-            cb({err:"Empty code",out:""})
         }
+        package_json = JSON.stringify(packageJson, null, 4);
+
+        manifest_yml = manifest_yml.replace(/{{name}}/g, name);
+
+        var zip = new AdmZip();
+        zip.addLocalFile("app.js", "app.js");
+        zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
+        zip.addFile("package.json", new Buffer(package_json), "package.json");
+        zip.addLocalFile(folder + "/README.txt", "");
+        zip.addLocalFile(folder + "/lib/superglue.js", "lib");
+        zip.addLocalFile(folder + "/public/style.css", "public");
+        zip.addFile("src/snippet.js", new Buffer(src_snippet_js), "snippet.js");
+
+        cb({
+            err : "",
+            out : {
+                zip : zip.toBuffer(),
+                name : name
+            }
+        });
     }
 
     function downloadJava(name, code, cb) {
-        if (code != "") {
-            var folder = "../package-templates/java/";
-            name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
-            var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
-            var pom_xml          = fs.readFileSync(folder + 'pom.xml','utf8');
-            var snippet_java     = code;
+        var folder = process.env.HOME + "/package-templates/java/";
+        name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
+        var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
+        var pom_xml          = fs.readFileSync(folder + 'pom.xml','utf8');
+        var snippet_java     = code;
 
-            manifest_yml = manifest_yml.replace(/{{name}}/g, name);
-            pom_xml = pom_xml.replace(/{{name}}/g, name);
+        manifest_yml = manifest_yml.replace(/{{name}}/g, name);
+        pom_xml = pom_xml.replace(/{{name}}/g, name);
 
-            var zip = new AdmZip();
-            zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
-            zip.addFile("pom.xml", new Buffer(pom_xml), "pom.xml");
-            zip.addLocalFile(folder + "README.txt", "");
-            zip.addLocalFile(folder + "libs/com/ibm/sample/super-glue/1.0.1/super-glue-1.0.1.jar", "libs/com/ibm/sample/super-glue/1.0.1");
-            zip.addFile("src/main/java/Snippet.java", new Buffer(snippet_java), "Snippet.java");
+        var zip = new AdmZip();
+        zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
+        zip.addFile("pom.xml", new Buffer(pom_xml), "pom.xml");
+        zip.addLocalFile(folder + "README.txt", "");
+        zip.addLocalFile(folder + "libs/com/ibm/sample/super-glue/1.0.1/super-glue-1.0.1.jar", "libs/com/ibm/sample/super-glue/1.0.1");
+        zip.addFile("src/main/java/Snippet.java", new Buffer(snippet_java), "Snippet.java");
 
-            cb({
-                err : "",
-                out : {
-                    zip : zip.toBuffer(),
-                    name : name
-                }
-            });
-        } else {
-            cb({err:"Empty code",out:""})
-        }
+        cb({
+            err : "",
+            out : {
+                zip : zip.toBuffer(),
+                name : name
+            }
+        });
     }
 
     // from core/io/httpin.js
@@ -276,6 +269,7 @@ public class Snippet extends SuperGluev2 {  \
             res.send({err:err,out:""});
         };
 
+        console.log("adding /playground_exec post path");
         RED.httpNode.post("/playground_exec",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
     
@@ -291,6 +285,11 @@ public class Snippet extends SuperGluev2 {  \
             var code = req.body.code || "";
             var mode = req.body.mode || "node";
 
+            if (code == "") {
+            	res.send({err:"Code is empty", out:""});
+            	return;
+            }            
+        
             if (mode == "node") {
             downloadNode(name, code, function(data) {
                 var msg = {
@@ -337,6 +336,8 @@ public class Snippet extends SuperGluev2 {  \
             res.send({err:err,out:""});
         };
 
+        console.log("adding /playground_download post path");
         RED.httpNode.post("/playground_download",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
 }
+
