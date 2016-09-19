@@ -52,7 +52,8 @@
         <input id="node-input-outputs" style="width: 60px;" value="1">
     </div>
     <div class="form-row">
-        <input id="node-button-preview" style="width: 100%;" value="Preview" type="button">
+        <input id="node-button-preview" style="width: 45%;" value="Preview" type="button">
+        <input id="node-button-download" style="width: 45%; float: right" value="Download" type="button">
     </div>
     <div class="form-row">
         <textarea id="node-input-previewarea" wrap="off" style="width: 100%; height: 100px; font-family:monospace;"></textarea>
@@ -211,16 +212,22 @@ public class Snippet extends SuperGluev2 {
             $("#node-input-import-editor").val(this.imports);
             
             function initRoot() {
-                var root = RED.settings.httpNodeRoot;
-                if (root.slice(-1) == "/")
-                    root = root.slice(0,-1);
-
+                var root = getRoot();
+                
                 if (root == "") {
                     $("#node-input-tip").hide();
                 } else {
                     $("#node-input-path").html(root);
                     $("#node-input-tip").show();
                 }
+            }
+            
+            function getRoot() {
+            	var root = RED.settings.httpNodeRoot || "";
+                if (root == "/" || root == ".")
+                    root = "";
+                    
+                return root;
             }
 
             function initJavaMode() {
@@ -310,7 +317,7 @@ public class Snippet extends SuperGluev2 {
                     $previewArea.val("Your code is being processed...");
                     $.ajax({
                         type: "POST",
-                        url: root + "/playground_exec",
+                        url: root + "/playground/execute",
                         data: data,
                         dataType : "json"
                     })
@@ -328,6 +335,48 @@ public class Snippet extends SuperGluev2 {
                         if (jqXHR.status == 404)
                             $previewArea.val("Error:\n\nYou have to deploy first before previewing.");
                     })
+                }
+            }
+            
+            function download() {
+                var editor = ace.edit("node-input-code-editor");
+                var code = editor.getValue();
+        
+                if (code != "") {
+                    var language = "java";
+                    var $previewArea = $("#node-input-previewarea");
+                    var $params = $("#node-input-param-container li");            
+                    var params = {};
+                    $params.each(function(i) {
+                        var key = $(this).find(".node-input-param-key").val();
+                        var value = $(this).find(".node-input-param-value").val();
+                        params[key] = value;        
+                    })
+        
+                    var data = {
+                        'name': $("#node-input-name").val(),
+                        'mode': language
+                    };
+             
+                    var jarLines        = "//jar@" + $("#node-input-jars").val() + "\n\n";
+                    var javaImports     = $("#playground-default .java-imports").text();
+                    var javaImportsMore = $("#node-input-import-editor").val();
+                    var javaStart       = $("#playground-default .java-start").text();
+                    var javaEnd         = $("#playground-default .java-end").text();
+                    var paramLines      = "    public String parameters = \"" + JSON.stringify(params).replace(/\"/g, "'") + "\";\n\n";
+                    data.code = jarLines + javaImports + javaImportsMore + javaStart + paramLines + code + javaEnd;
+                    //console.log(data.code);
+        
+                    var root = getRoot();
+                    var $form = $("<form>");
+                    $form.attr("action", root + "/playground/download/java").attr("method", "POST").attr("target", "_blank");
+                    for (var i in data) {
+                        if (i == "code") 
+                            $form.append($("<textarea>").attr("name", i).val(data[i]));
+                        else
+                            $form.append($("<input>").attr("name", i).val(data[i]));
+                    }
+                    $form.submit();
                 }
             }
         },
