@@ -395,7 +395,7 @@ public class Snippet extends SuperGluev2 {
                     $previewArea.val("Your code is being processed...");
                     $.ajax({
                         type: "POST",
-                        url: root + "/playground_exec",
+                        url: root + "/playground/execute",
                         data: data,
                         dataType : "json"
                     })
@@ -454,7 +454,7 @@ public class Snippet extends SuperGluev2 {
                     var root = getRoot();
 
                     var $form = $("<form>");
-                    $form.attr("action", root + "/playground_download").attr("method", "POST").attr("target", "_blank");
+                    $form.attr("action", root + "/playground/download").attr("method", "POST").attr("target", "_blank");
                     for (var i in data) {
                         if (i == "code") 
                             $form.append($("<textarea>").attr("name", i).val(data[i]));
