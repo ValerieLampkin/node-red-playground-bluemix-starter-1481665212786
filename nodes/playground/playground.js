@@ -269,8 +269,8 @@ public class Snippet extends SuperGluev2 {  \
             res.send({err:err,out:""});
         };
 
-        console.log("adding /playground_exec post path");
-        RED.httpNode.post("/playground_exec",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
+        console.log("adding /playground/execute post path");
+        RED.httpNode.post("/playground/execute",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
     
     // from core/io/httpin.js
@@ -336,8 +336,8 @@ public class Snippet extends SuperGluev2 {  \
             res.send({err:err,out:""});
         };
 
-        console.log("adding /playground_download post path");
-        RED.httpNode.post("/playground_download",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
+        console.log("adding /playground/download post path");
+        RED.httpNode.post("/playground/download",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
 }
 
