@@ -314,7 +314,7 @@ function process(parameters, callback) { // DO NOT REMOVE THIS LINE
         
                     var root = getRoot();
                     var $form = $("<form>");
-                    $form.attr("action", root + "/playground/download/node").attr("method", "POST").attr("target", "_blank");
+                    $form.attr("action", $("#node-input-url").val() + "/api/download").attr("method", "POST").attr("target", "_blank");
                     for (var i in data) {
                         if (i == "code") 
                             $form.append($("<textarea>").attr("name", i).val(data[i]));

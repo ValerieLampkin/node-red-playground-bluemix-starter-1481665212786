@@ -1,7 +1,0 @@
-applications:
-- name: {{name}}
-  memory: 256M
-  disk_quota: 512M
-  host: {{name}}-${random-word}
-  command: node app.js
-  buildpack: sdk-for-nodejs

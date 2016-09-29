@@ -26,7 +26,6 @@ module.exports = function(RED) {
     var querystring = require('querystring');
 
     var fs = require("fs");
-    var AdmZip = require("adm-zip");
 
     var nodeEnd = "\n\n\
 if (require.main === module) {      \
@@ -102,7 +101,6 @@ public class Snippet extends SuperGluev2 {  \
         });
 
         HTTPIn(node, n);
-        HTTPInDownload(node, n);
     }
     RED.nodes.registerType("playground", PlaygroundNode);
 
@@ -171,74 +169,6 @@ public class Snippet extends SuperGluev2 {  \
         }
     }
 
-    function downloadNode(name, code, cb) {
-        var folder = process.env.HOME + "/package-templates/node/";
-        name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
-        var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
-        var package_json     = fs.readFileSync(folder + 'package.json','utf8');
-        var src_snippet_js   = code;
-        var packageJson = JSON.parse(package_json);
-        packageJson.name = name;
-
-        var codePackages = code.split("require(");
-        if (codePackages.length > 1) {
-            for (var i in codePackages) {
-                if (i == 0) continue;
-                var package_ = codePackages[i].substring(0,codePackages[i].indexOf(")")).replace(/\"/g,"").replace(/\'/g,"");
-                if (package_ != "" && package_ != "../lib/superglue.js") {
-                    if (typeof packageJson.dependencies[package_] == "undefined")
-                        packageJson.dependencies[package_] = "*";
-                }
-            }
-        }
-        package_json = JSON.stringify(packageJson, null, 4);
-
-        manifest_yml = manifest_yml.replace(/{{name}}/g, name);
-
-        var zip = new AdmZip();
-        zip.addLocalFile("app.js", "app.js");
-        zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
-        zip.addFile("package.json", new Buffer(package_json), "package.json");
-        zip.addLocalFile(folder + "/README.txt", "");
-        zip.addLocalFile(folder + "/lib/superglue.js", "lib");
-        zip.addLocalFile(folder + "/public/style.css", "public");
-        zip.addFile("src/snippet.js", new Buffer(src_snippet_js), "snippet.js");
-
-        cb({
-            err : "",
-            out : {
-                zip : zip.toBuffer(),
-                name : name
-            }
-        });
-    }
-
-    function downloadJava(name, code, cb) {
-        var folder = process.env.HOME + "/package-templates/java/";
-        name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
-        var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
-        var pom_xml          = fs.readFileSync(folder + 'pom.xml','utf8');
-        var snippet_java     = code;
-
-        manifest_yml = manifest_yml.replace(/{{name}}/g, name);
-        pom_xml = pom_xml.replace(/{{name}}/g, name);
-
-        var zip = new AdmZip();
-        zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
-        zip.addFile("pom.xml", new Buffer(pom_xml), "pom.xml");
-        zip.addLocalFile(folder + "README.txt", "");
-        zip.addLocalFile(folder + "libs/com/ibm/sample/super-glue/1.0.1/super-glue-1.0.1.jar", "libs/com/ibm/sample/super-glue/1.0.1");
-        zip.addFile("src/main/java/Snippet.java", new Buffer(snippet_java), "Snippet.java");
-
-        cb({
-            err : "",
-            out : {
-                zip : zip.toBuffer(),
-                name : name
-            }
-        });
-    }
-
     // from core/io/httpin.js
     function HTTPIn(node, n) {
         var skip = function(req,res,next) { next(); }
@@ -273,71 +203,5 @@ public class Snippet extends SuperGluev2 {  \
         RED.httpNode.post("/playground/execute",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
     
-    // from core/io/httpin.js
-    function HTTPInDownload(node, n) {
-        var skip = function(req,res,next) { next(); }
-
-        node.callback = function(req,res) {
-            var msgid = RED.util.generateId();
-            res._msgid = msgid;
-
-            var name = req.body.name || "";
-            var code = req.body.code || "";
-            var mode = req.body.mode || "node";
-
-            if (code == "") {
-            	res.send({err:"Code is empty", out:""});
-            	return;
-            }            
-        
-            if (mode == "node") {
-            downloadNode(name, code, function(data) {
-                var msg = {
-                    _msgid: msgid,
-                    req: req,
-                    res: res,
-                    payload: data
-                };
-                node.send(msg);
-                node.status({});
-               
-                if (data.out.err) {
-                    res.send(data.out.err);
-                } else {
-                    res.contentType('application/zip');
-                    res.setHeader('content-disposition','attachment; filename=' + data.out.name + '.zip');
-                    res.send(data.out.zip);
-                }
-            });
-            } else if (mode == "java") {
-            downloadJava(name, code, function(data) {
-                var msg = {
-                    _msgid: msgid,
-                    req: req,
-                    res: res,
-                    payload: data
-                };
-                node.send(msg);
-                node.status({});
-               
-                if (data.out.err) {
-                    res.send(data.out.err);
-                } else {
-                    res.contentType('application/zip');
-                    res.setHeader('content-disposition','attachment; filename=' + data.out.name + '.zip');
-                    res.send(data.out.zip);
-                }
-            });
-            }
-        };
-
-        node.errorHandler = function(err,req,res,next) {
-            node.warn(err);
-            res.send({err:err,out:""});
-        };
-
-        console.log("adding /playground/download post path");
-        RED.httpNode.post("/playground/download",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
-    }
 }
 

@@ -146,32 +146,7 @@ public class Snippet extends SuperGluev2 {  \
         execute(host, mode, jarLines + javaImports + imports + javaStart + paramLines + code + javaEnd, cb);
     }
 
-    function downloadJava(name, code, cb) {
-        var folder = process.env.HOME + "/package-templates/java/";
-        name = name.replace(/[^0-9a-z]/gi, " ").replace(/\s/g, "-").toLowerCase();
-        var manifest_yml     = fs.readFileSync(folder + 'manifest.yml','utf8');
-        var pom_xml          = fs.readFileSync(folder + 'pom.xml','utf8');
-        var snippet_java     = code;
-
-        manifest_yml = manifest_yml.replace(/{{name}}/g, name);
-        pom_xml = pom_xml.replace(/{{name}}/g, name);
-
-        var zip = new AdmZip();
-        zip.addFile("manifest.yml", new Buffer(manifest_yml), "manifest.yml");
-        zip.addFile("pom.xml", new Buffer(pom_xml), "pom.xml");
-        zip.addLocalFile(folder + "README.txt", "");
-        zip.addLocalFile(folder + "libs/com/ibm/sample/super-glue/1.0.1/super-glue-1.0.1.jar", "libs/com/ibm/sample/super-glue/1.0.1");
-        zip.addFile("src/main/java/Snippet.java", new Buffer(snippet_java), "Snippet.java");
-
-        cb({
-            err : "",
-            out : {
-                zip : zip.toBuffer(),
-                name : name
-            }
-        });
-    }
-
+    
     // from core/io/httpin.js
     function HTTPIn(node, n) {
         var skip = function(req,res,next) { next(); }
@@ -203,51 +178,5 @@ public class Snippet extends SuperGluev2 {  \
         };
 
         RED.httpNode.post("/playground/execute",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
-    }
-    
-    // from core/io/httpin.js
-    function HTTPInDownload(node, n) {
-        var skip = function(req,res,next) { next(); }
-
-        node.callback = function(req,res) {
-            var msgid = RED.util.generateId();
-            res._msgid = msgid;
-
-            var name = req.body.name || "";
-            var code = req.body.code || "";
-            var mode = "java";
-
-            if (code == "") {
-            	res.send({err:"Code is empty", out:""});
-            	return;
-            }            
-        
-            downloadJava(name, code, function(data) {
-                var msg = {
-                    _msgid: msgid,
-                    req: req,
-                    res: res,
-                    payload: data
-                };
-                node.send(msg);
-                node.status({});
-               
-                if (data.out.err) {
-                    res.send(data.out.err);
-                } else {
-                    res.contentType('application/zip');
-                    res.setHeader('content-disposition','attachment; filename=' + data.out.name + '.zip');
-                    res.send(data.out.zip);
-                }
-            });
-        };
-
-        node.errorHandler = function(err,req,res,next) {
-            node.warn(err);
-            res.send({err:err,out:""});
-        };
-
-        console.log("adding /playground/download/java post path");
-        RED.httpNode.post("/playground/download/java",cookieParser(),skip,skip,skip,jsonParser,urlencParser,skip,node.callback,node.errorHandler);
     }
 }
