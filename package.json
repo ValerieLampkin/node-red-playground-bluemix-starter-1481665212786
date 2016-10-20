@@ -13,14 +13,20 @@
         "cookie-parser": "*",
         
         "node-red": "0.x",
-        "node-red-bluemix-nodes": "*",
+        "node-red-node-box": "*",
+        "node-red-node-exif": "*",
+        "node-red-node-mysql": "*",
         "node-red-node-watson": "*",
+        "node-red-node-flickr": "*",
+        "node-red-node-dropbox": "*",
         "node-red-node-openwhisk": "*",
         "node-red-node-cf-cloudant": "*",
+        "node-red-bluemix-nodes": "*",
+        "node-red-contrib-redis": "*",
         "node-red-contrib-scx-ibmiotapp": "*",
         "node-red-contrib-ibmpush": "*",
         "node-red-contrib-bluemix-hdfs": "*",
-        "node-red-nodes-cf-sqldb-dashdb": "*",        
+        "node-red-nodes-cf-sqldb-dashdb": "*",
         
         "adm-zip": "*",
         "cf-deployment-tracker-client": "*"
