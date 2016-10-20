@@ -1,1 +1,2550 @@
-[{"id":"b1b11140.4e4ef","type":"inject","name":"","topic":"","payload":"Hello Node-RED!","payloadType":"string","repeat":"","crontab":"","once":false,"x":141,"y":61,"z":"a09be5e0.5f6418","wires":[["f2f2649a.0d0d98"]]},{"id":"f2f2649a.0d0d98","type":"debug","name":"","active":true,"console":"false","complete":"false","x":401,"y":87,"z":"a09be5e0.5f6418","wires":[]}]
+﻿[
+    {
+      "id": "cf80eeaa.d850d",
+      "type": "tab",
+      "label": "1. Comment , Trigger , Debug"
+    },
+    {
+      "id": "e08a0bbb.7fdb18",
+      "type": "tab",
+      "label": "2. Function , Delay , Trigger"
+    },
+    {
+      "id": "79b691bb.ac7f1",
+      "type": "tab",
+      "label": "3. HTTP"
+    },
+    {
+      "id": "6767a97f.a97a08",
+      "type": "tab",
+      "label": "4. HTML"
+    },
+    {
+      "id": "c35d664b.071af8",
+      "type": "tab",
+      "label": "5. CSV , JSON"
+    },
+    {
+      "id": "1e626036.76d8e",
+      "type": "tab",
+      "label": "6. IOT"
+    },
+    {
+      "id": "81cb6269.88069",
+      "type": "tab",
+      "label": "a. Twitter Sentiment Analysis"
+    },
+    {
+      "id": "21d3432e.66272c",
+      "type": "tab",
+      "label": "b. Flickr Photo of the day"
+    },
+    {
+      "id": "dbac1fe5.9e262",
+      "type": "tab",
+      "label": "c. MySQL Table backup to Box.com"
+    },
+    {
+      "id": "489e4ba7.adbfd4",
+      "type": "tab",
+      "label": "d. Language Translation"
+    },
+    {
+      "id": "e7e324ab.fe16f8",
+      "type": "tab",
+      "label": "e. Text to Speech"
+    },
+    {
+      "id": "a96da409.0ad3d8",
+      "type": "tab",
+      "label": "f. Alchemy Image analysis"
+    },
+    {
+      "id": "15eec225.ebca4e",
+      "type": "tab",
+      "label": "g. Convert Speech to Text"
+    },
+    {
+      "id": "bfcf349b.f88f48",
+      "type": "tab",
+      "label": "h. Plot locations on google maps"
+    },
+    {
+      "id": "e4eb2ffb.d7975",
+      "type": "tab",
+      "label": "i. Website Availability"
+    },
+    {
+      "id": "b3976def.673b2",
+      "type": "tab",
+      "label": "j. Microblog"
+    },
+    {
+      "id": "b99f6b2f.612348",
+      "type": "tab",
+      "label": "k. Dump CSV to Cloudant"
+    },
+    {
+      "id": "1476a607.94f83a",
+      "type": "tab",
+      "label": "l. Insert data to Redis Database."
+    },
+    {
+      "id": "76747bdb.c001a4",
+      "type": "tab",
+      "label": "w1. Concept Insights"
+    },
+    {
+      "id": "267ebb2d.871184",
+      "type": "tab",
+      "label": "w2. Document Conversion"
+    },
+    {
+      "id": "e94541b2.84fbe",
+      "type": "tab",
+      "label": "w3. Conversation"
+    },
+    {
+      "id": "23eee02d.ad562",
+      "type": "tab",
+      "label": "w4. Dialog"
+    },
+    {
+      "id": "f33ac66.9a75638",
+      "type": "tab",
+      "label": "w5. Natural Language Classifier"
+    },
+    {
+      "id": "8666124.336bcf",
+      "type": "tab",
+      "label": "w6. Alchemy Data news."
+    },
+    {
+      "id": "9a7b67b5.c6c4e8",
+      "type": "tab",
+      "label": "w7. Personality Insights"
+    },
+    {
+      "id": "9f6272aa.ab50a",
+      "type": "tab",
+      "label": "w8. Relationship Extraction."
+    },
+    {
+      "id": "d90c57bd.66cf38",
+      "type": "tab",
+      "label": "w9. Tone Analyzer"
+    },
+    {
+      "id": "c1bdad31.8d1e8",
+      "type": "tab",
+      "label": "w10. Visual Recognition"
+    },
+    {
+      "id": "9857c5bc.42c618",
+      "type": "tab",
+      "label": "w11. Tradeoff Analytics"
+    },
+    {
+      "id": "f57b8526.d67de8",
+      "type": "tab",
+      "label": "w12. Rank and Retrieve"
+    },
+    {
+      "id": "79ec9a60.b24714",
+      "type": "websocket-listener",
+      "path": "/ws/audio",
+      "wholemsg": "false"
+    },
+    {
+      "id": "e01de1e.4c3d62",
+      "type": "websocket-listener",
+      "path": "/ws/stations",
+      "wholemsg": "false"
+    },
+    {
+      "id": "1fc0a261.9d4afe",
+      "type": "twilio-api",
+      "z": "e4eb2ffb.d7975",
+      "sid": "ACcecda65052863583dbfc8792b3daf5b4",
+      "from": "+19802014987",
+      "name": ""
+    },
+    {
+      "id": "6a5939b.58483c8",
+      "type": "mongodb",
+      "z": "b3976def.673b2",
+      "hostname": "ds015929.mlab.com",
+      "port": "15929",
+      "db": "mongo_node_red",
+      "name": ""
+    },
+    {
+      "id": "988dd1f1.e7df8",
+      "type": "cloudant",
+      "name": "surveydb"
+    },
+    {
+      "id": "ca30bb75.cdcf88",
+      "type": "redis-config",
+      "z": "1476a607.94f83a",
+      "host": "pub-redis-12700.dal-05.1.sl.garantiadata.com",
+      "port": "12700",
+      "dbase": "a42fd70e-e131-4cfc-85be-c2cbbf0cdd16",
+      "pass": "DM2MtBsU2q1H1YbN"
+    },
+    {
+      "id": "34c6aad3.c286b6",
+      "type": "watson-concept-insights-corpus",
+      "z": "76747bdb.c001a4",
+      "cname": "",
+      "access": "private",
+      "corpusmode": "public",
+      "publiccorpus": "TEDTalks"
+    },
+    {
+      "id": "9548859f.def7c8",
+      "type": "watson-retrieve-rank-credentials",
+      "z": "f57b8526.d67de8",
+      "username": "ab9611d7-a226-42a0-bc22-11549a3f727a",
+      "password": "BY4Fpgw8olil"
+    },
+    {
+      "id": "ad18234f.68332",
+      "type": "inject",
+      "z": "cf80eeaa.d850d",
+      "name": "inject",
+      "topic": "",
+      "payload": "Hello World !",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 407,
+      "y": 274,
+      "wires": [
+        [
+          "57dae35.6c5d31c"
+        ]
+      ]
+    },
+    {
+      "id": "57dae35.6c5d31c",
+      "type": "debug",
+      "z": "cf80eeaa.d850d",
+      "name": "debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 783.5,
+      "y": 273,
+      "wires": []
+    },
+    {
+      "id": "ab245a59.60d7d8",
+      "type": "inject",
+      "z": "e08a0bbb.7fdb18",
+      "name": "inject",
+      "topic": "",
+      "payload": "Alice",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 326,
+      "y": 222,
+      "wires": [
+        [
+          "e32c118c.fe80c"
+        ]
+      ]
+    },
+    {
+      "id": "ceb4c214.6e287",
+      "type": "debug",
+      "z": "e08a0bbb.7fdb18",
+      "name": "debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1110.5,
+      "y": 293,
+      "wires": []
+    },
+    {
+      "id": "e32c118c.fe80c",
+      "type": "function",
+      "z": "e08a0bbb.7fdb18",
+      "name": "Append Hello",
+      "func": "msg.payload = \"Hello \"+msg.payload\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 825.5,
+      "y": 295,
+      "wires": [
+        [
+          "ceb4c214.6e287"
+        ]
+      ]
+    },
+    {
+      "id": "d87aa984.14ad38",
+      "type": "trigger",
+      "z": "e08a0bbb.7fdb18",
+      "op1": "Charlie",
+      "op2": "David",
+      "op1type": "str",
+      "op2type": "str",
+      "duration": "500",
+      "extend": false,
+      "units": "ms",
+      "reset": "",
+      "name": "",
+      "x": 539.5,
+      "y": 419,
+      "wires": [
+        [
+          "e32c118c.fe80c"
+        ]
+      ]
+    },
+    {
+      "id": "dded8348.cd199",
+      "type": "inject",
+      "z": "e08a0bbb.7fdb18",
+      "name": "inject",
+      "topic": "",
+      "payload": "",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 321,
+      "y": 420,
+      "wires": [
+        [
+          "d87aa984.14ad38"
+        ]
+      ]
+    },
+    {
+      "id": "33e641d8.2e57de",
+      "type": "delay",
+      "z": "e08a0bbb.7fdb18",
+      "name": "",
+      "pauseType": "delay",
+      "timeout": "3",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "rateUnits": "second",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": false,
+      "x": 552.5,
+      "y": 312,
+      "wires": [
+        [
+          "e32c118c.fe80c"
+        ]
+      ]
+    },
+    {
+      "id": "8747d15d.fb99e",
+      "type": "inject",
+      "z": "e08a0bbb.7fdb18",
+      "name": "inject",
+      "topic": "",
+      "payload": "Betty",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 325,
+      "y": 313,
+      "wires": [
+        [
+          "33e641d8.2e57de"
+        ]
+      ]
+    },
+    {
+      "id": "cbcc4c2b.68bad",
+      "type": "http in",
+      "z": "79b691bb.ac7f1",
+      "name": "HTTP Request GET /hello",
+      "url": "/hello",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 344.5,
+      "y": 281,
+      "wires": [
+        [
+          "911c20e9.080d4"
+        ]
+      ]
+    },
+    {
+      "id": "5e23aa1e.c141d4",
+      "type": "http response",
+      "z": "79b691bb.ac7f1",
+      "name": "HTTP Response",
+      "x": 984.5,
+      "y": 280,
+      "wires": []
+    },
+    {
+      "id": "911c20e9.080d4",
+      "type": "function",
+      "z": "79b691bb.ac7f1",
+      "name": "Create a response",
+      "func": "var name = msg.payload.name;\nmsg.payload = \"Hello \"+name+\",Welcome to node red\";\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 671.5,
+      "y": 282,
+      "wires": [
+        [
+          "5e23aa1e.c141d4"
+        ]
+      ]
+    },
+    {
+      "id": "baa71f3e.869d3",
+      "type": "html",
+      "z": "6767a97f.a97a08",
+      "name": "Extract all content in H2 Tags",
+      "tag": "h2",
+      "ret": "text",
+      "as": "single",
+      "x": 761.5,
+      "y": 400,
+      "wires": [
+        [
+          "11c9c962.c7d9e7"
+        ]
+      ]
+    },
+    {
+      "id": "906cce83.c5b89",
+      "type": "inject",
+      "z": "6767a97f.a97a08",
+      "name": "inject",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 242.5,
+      "y": 229,
+      "wires": [
+        [
+          "87f3b91e.c65988"
+        ]
+      ]
+    },
+    {
+      "id": "87f3b91e.c65988",
+      "type": "http request",
+      "z": "6767a97f.a97a08",
+      "name": "http request on www.ibm.com",
+      "method": "GET",
+      "ret": "txt",
+      "url": "http://www.ibm.com/",
+      "tls": "",
+      "x": 491.5,
+      "y": 306,
+      "wires": [
+        [
+          "baa71f3e.869d3"
+        ]
+      ]
+    },
+    {
+      "id": "11c9c962.c7d9e7",
+      "type": "debug",
+      "z": "6767a97f.a97a08",
+      "name": "debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 984.5,
+      "y": 492,
+      "wires": []
+    },
+    {
+      "id": "3363db00.942e86",
+      "type": "csv",
+      "z": "c35d664b.071af8",
+      "name": "csv to javascript object",
+      "sep": ",",
+      "hdrin": false,
+      "hdrout": true,
+      "multi": "one",
+      "ret": "\\n",
+      "temp": "FirstName,LastName",
+      "x": 627.5,
+      "y": 237,
+      "wires": [
+        [
+          "6b161af.7b978e4",
+          "5f5db4f1.6d516c"
+        ]
+      ]
+    },
+    {
+      "id": "f63f3a68.feed08",
+      "type": "inject",
+      "z": "c35d664b.071af8",
+      "name": "Input : \"Alice\",Smith\"",
+      "topic": "",
+      "payload": "\"Alice\",Smith\"",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 341.5,
+      "y": 237,
+      "wires": [
+        [
+          "3363db00.942e86"
+        ]
+      ]
+    },
+    {
+      "id": "6b161af.7b978e4",
+      "type": "debug",
+      "z": "c35d664b.071af8",
+      "name": "debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1068.5,
+      "y": 233,
+      "wires": []
+    },
+    {
+      "id": "5f5db4f1.6d516c",
+      "type": "json",
+      "z": "c35d664b.071af8",
+      "name": "javascript object to json",
+      "x": 871.5,
+      "y": 431,
+      "wires": [
+        [
+          "6b161af.7b978e4"
+        ]
+      ]
+    },
+    {
+      "id": "6d08dfa5.d4cef",
+      "type": "ibmiot in",
+      "z": "1e626036.76d8e",
+      "authentication": "quickstart",
+      "apiKey": "",
+      "inputType": "evt",
+      "deviceId": "566a62a77b24",
+      "applicationId": "",
+      "deviceType": "+",
+      "eventType": "+",
+      "commandType": "",
+      "format": "json",
+      "name": "IBM IoT",
+      "service": "quickstart",
+      "allDevices": "",
+      "allApplications": "",
+      "allDeviceTypes": true,
+      "allEvents": true,
+      "allCommands": "",
+      "allFormats": "",
+      "qos": 0,
+      "x": 227.5,
+      "y": 234,
+      "wires": [
+        [
+          "2d8f9ce5.31f394"
+        ]
+      ]
+    },
+    {
+      "id": "7c38dc7b.991d44",
+      "type": "debug",
+      "z": "1e626036.76d8e",
+      "name": "debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1039.5,
+      "y": 234,
+      "wires": []
+    },
+    {
+      "id": "2d8f9ce5.31f394",
+      "type": "function",
+      "z": "1e626036.76d8e",
+      "name": "Extract Temp and Humidity",
+      "func": "var temp = msg.payload.d.temp;\nvar humidity = msg.payload.d.humidity;\nmsg.payload = \"The current temp is \"+temp+\" and humidity is \" +humidity;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 526.5,
+      "y": 233,
+      "wires": [
+        [
+          "77cf1308.a1520c"
+        ]
+      ]
+    },
+    {
+      "id": "81bc574.8ec69a8",
+      "type": "comment",
+      "z": "cf80eeaa.d850d",
+      "name": "Comment",
+      "info": "This is a comment node. This node can be used to \nwrite comments , readme's and any other information.\n\nInject node is used to inject message to the flow.\nThe inject node can be schedules too. This injected\nmessage is passed to debug node,which displays the \nmessage.",
+      "x": 399.5,
+      "y": 205,
+      "wires": []
+    },
+    {
+      "id": "e07442c0.05a25",
+      "type": "comment",
+      "z": "e08a0bbb.7fdb18",
+      "name": "Readme",
+      "info": "The first inject node send the message directly to the function node.\nThe function node append to the received message.\n\nSecond inject node injects the msg to delay node. \nDelay node is used to delay the message. In this case\nthe message is delayed for 3 seconds\n\nThird inject node does not send any First Name. It is\nused just to start the flow. The trigger node is used to\nintroduce delay time between tranferring the messages\n.In this case the it is 500ms between two messages",
+      "x": 317.5,
+      "y": 154,
+      "wires": []
+    },
+    {
+      "id": "ab005fca.6cf09",
+      "type": "comment",
+      "z": "79b691bb.ac7f1",
+      "name": "Readme",
+      "info": "HTTP Request node is used to create and endpoint\nfor /hello. When a user visit's the endpoint the request\nis captured and sends it to function node.\n\nFunction node extracts the name provided in the URL\nand create a response to be passed to user. This message\nis passed to HTTP Response.\n\nHTTP Response node send the response back to the \nget request.",
+      "x": 294,
+      "y": 200,
+      "wires": []
+    },
+    {
+      "id": "33accaf6.ed3116",
+      "type": "comment",
+      "z": "6767a97f.a97a08",
+      "name": "Readme",
+      "info": "Inject node is used as a dummy node to start the flow.\n\nThe http function node get the response from www.ibm.com and\npasses it to HTML node.\n\nHTML node extracts the content of all H2 tags in the HTML\nreceived\n\nDebug node is used to display the message in the debug window",
+      "x": 235,
+      "y": 162,
+      "wires": []
+    },
+    {
+      "id": "aec8bed8.535bf",
+      "type": "comment",
+      "z": "c35d664b.071af8",
+      "name": "Readme",
+      "info": "Inject node injects comma seperated values to the csv node as a string\n\nCSV node converts this string to a javascript object\n\nJSON Node converts the javascript object to JSON String.",
+      "x": 335,
+      "y": 180,
+      "wires": []
+    },
+    {
+      "id": "2334f9f6.f16416",
+      "type": "comment",
+      "z": "1e626036.76d8e",
+      "name": "Readme",
+      "info": "IBM IoT accepts the device ID as the input. Go to \nhttps://quickstart.internetofthings.ibmcloud.com/iotsensor/ to \nget the device ID of the virtual sensor and provided it to the\nIBM IoT node.\n\nThe function node extracts the temp and humidity from the \nmessage received from IBM IoT node and converts it into a \nreadable message.\n\nThis device emits the message every second. To limit the outupt\nmessages , rate limitter node is used. This node can restrict\nthe output to just one message per minute. In this case the\nintermediate messages are dropped.",
+      "x": 232,
+      "y": 163,
+      "wires": []
+    },
+    {
+      "id": "77cf1308.a1520c",
+      "type": "delay",
+      "z": "1e626036.76d8e",
+      "name": "",
+      "pauseType": "rate",
+      "timeout": "6",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "rateUnits": "minute",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": true,
+      "x": 814.5,
+      "y": 234,
+      "wires": [
+        [
+          "7c38dc7b.991d44"
+        ]
+      ]
+    },
+    {
+      "id": "ae1defc6.6bb85",
+      "type": "twitter in",
+      "z": "81cb6269.88069",
+      "twitter": "",
+      "tags": "ibm",
+      "user": "false",
+      "name": "Keyword",
+      "topic": "tweets",
+      "x": 319,
+      "y": 400,
+      "wires": [
+        [
+          "49d6c1d1.a4805"
+        ]
+      ]
+    },
+    {
+      "id": "49d6c1d1.a4805",
+      "type": "sentiment",
+      "z": "81cb6269.88069",
+      "name": "",
+      "x": 498,
+      "y": 399,
+      "wires": [
+        [
+          "8c5d27e2.acfba8"
+        ]
+      ]
+    },
+    {
+      "id": "8c5d27e2.acfba8",
+      "type": "switch",
+      "z": "81cb6269.88069",
+      "name": "",
+      "property": "sentiment.score",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "gt",
+          "v": "0",
+          "vt": "str"
+        },
+        {
+          "t": "eq",
+          "v": "0",
+          "vt": "str"
+        },
+        {
+          "t": "lt",
+          "v": "0",
+          "vt": "str"
+        }
+      ],
+      "checkall": "false",
+      "outputs": 3,
+      "x": 638,
+      "y": 399,
+      "wires": [
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "174bd0b3.dc975f",
+      "type": "debug",
+      "z": "81cb6269.88069",
+      "name": "Positive Tweets",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 844.5,
+      "y": 324,
+      "wires": []
+    },
+    {
+      "id": "1172230d.54549d",
+      "type": "debug",
+      "z": "81cb6269.88069",
+      "name": "Negative Tweets",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 853.5,
+      "y": 474,
+      "wires": []
+    },
+    {
+      "id": "5fed7144.6aff4",
+      "type": "debug",
+      "z": "81cb6269.88069",
+      "name": "Neutral Tweets",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 844.5,
+      "y": 397,
+      "wires": []
+    },
+    {
+      "id": "13e00786.f83b58",
+      "type": "comment",
+      "z": "81cb6269.88069",
+      "name": "ReadMe",
+      "info": "A keyword is mentioned in the twitter node. The tweets\nare extracted based on this key word and sent to\nsentiment node. A switch node is used to classify \nthe positive,neutral and negative tweets. They are\ndisplayed over debug nodes.",
+      "x": 314.5,
+      "y": 323,
+      "wires": []
+    },
+    {
+      "id": "3aff3a33.b86f56",
+      "type": "inject",
+      "z": "21d3432e.66272c",
+      "name": "Fire Every Morning",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "00 07 * * *",
+      "once": false,
+      "x": 115,
+      "y": 467,
+      "wires": [
+        [
+          "81027883.3e2a48"
+        ]
+      ]
+    },
+    {
+      "id": "fc103643.790da8",
+      "type": "flickr out",
+      "z": "21d3432e.66272c",
+      "flickr": "",
+      "privacy": "pr",
+      "tags": "node-red",
+      "name": "",
+      "x": 1252,
+      "y": 468,
+      "wires": []
+    },
+    {
+      "id": "81027883.3e2a48",
+      "type": "function",
+      "z": "21d3432e.66272c",
+      "name": "Pick File",
+      "func": "date = new Date()\nmonth = date.getMonth()+1\nmsg.filename = \"photos/\" + date.getFullYear() + \"-\" + month + \"-\" + date.getDate() + \".jpg\"\nreturn msg;\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 337,
+      "y": 467,
+      "wires": [
+        [
+          "2d03bd96.7db6c2"
+        ]
+      ]
+    },
+    {
+      "id": "733cac18.77f494",
+      "type": "exif",
+      "z": "21d3432e.66272c",
+      "name": "Extract EXIF data from image",
+      "x": 795,
+      "y": 260,
+      "wires": [
+        [
+          "6c50cb31.b98894"
+        ]
+      ]
+    },
+    {
+      "id": "6c50cb31.b98894",
+      "type": "function",
+      "z": "21d3432e.66272c",
+      "name": "Parse EXIF",
+      "func": "msg.title = msg.exif.image.ImageDescription\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 1046,
+      "y": 259,
+      "wires": [
+        [
+          "fc103643.790da8"
+        ]
+      ]
+    },
+    {
+      "id": "2d03bd96.7db6c2",
+      "type": "dropbox",
+      "z": "21d3432e.66272c",
+      "dropbox": "",
+      "filename": "",
+      "name": "Fetch Images from Dropbox",
+      "x": 576.5,
+      "y": 467,
+      "wires": [
+        [
+          "733cac18.77f494",
+          "fc103643.790da8"
+        ]
+      ]
+    },
+    {
+      "id": "f8288c8d.bc799",
+      "type": "comment",
+      "z": "21d3432e.66272c",
+      "name": "ReadMe",
+      "info": "This flow fetches the image file from dropbox every\nmorning and uploads to the Flickr photostream.\n\nThe image files in the dropbox are named with the\ndate in YYYY-MM-DD format.\n\nIf the EXIF data exists for the image, the name\nof the photo in flickr is picked.\n\nNodes Used:\nIngest\nFunction\nDropbox\nexif\nFlickr",
+      "x": 86.5,
+      "y": 397,
+      "wires": []
+    },
+    {
+      "id": "7981af3e.b5ca2",
+      "type": "mysql",
+      "z": "dbac1fe5.9e262",
+      "mydb": "",
+      "name": "MySQL Database Credentials",
+      "x": 711,
+      "y": 344,
+      "wires": [
+        [
+          "5e478a2b.3086b4"
+        ]
+      ]
+    },
+    {
+      "id": "9cd08606.b1cd48",
+      "type": "function",
+      "z": "dbac1fe5.9e262",
+      "name": "Build SQL Query",
+      "func": "var msg = {topic:\"select * from ad_ef085684a32fcf2.posts;\"}\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 429.5,
+      "y": 345,
+      "wires": [
+        [
+          "7981af3e.b5ca2"
+        ]
+      ]
+    },
+    {
+      "id": "ec93ddf4.58b8c",
+      "type": "box out",
+      "z": "dbac1fe5.9e262",
+      "box": "",
+      "filename": "",
+      "localFilename": "",
+      "name": "Store backup as a file in Box.com",
+      "x": 1236.5,
+      "y": 343,
+      "wires": []
+    },
+    {
+      "id": "5e478a2b.3086b4",
+      "type": "csv",
+      "z": "dbac1fe5.9e262",
+      "name": "Convert to CSV",
+      "sep": ",",
+      "hdrin": "",
+      "hdrout": true,
+      "multi": "one",
+      "ret": "\\n",
+      "temp": "id,title,post_content",
+      "x": 968.5,
+      "y": 488,
+      "wires": [
+        [
+          "ec93ddf4.58b8c"
+        ]
+      ]
+    },
+    {
+      "id": "b05d7085.4fb63",
+      "type": "inject",
+      "z": "dbac1fe5.9e262",
+      "name": "Trigger Every Morning",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "00 04 * * *",
+      "once": false,
+      "x": 151.5,
+      "y": 344,
+      "wires": [
+        [
+          "9cd08606.b1cd48"
+        ]
+      ]
+    },
+    {
+      "id": "aca20fd2.9f8cc",
+      "type": "comment",
+      "z": "dbac1fe5.9e262",
+      "name": "ReadMe",
+      "info": "This flow get the data from a mysql database every \nday and saves it in CSV format in Box.com\n\nNodes Used:\n\nIngest\nfunction\nMySQL\nCSV\nbox",
+      "x": 119,
+      "y": 238,
+      "wires": []
+    },
+    {
+      "id": "81b10f49.b527",
+      "type": "watson-translate",
+      "z": "489e4ba7.adbfd4",
+      "name": "",
+      "action": "translate",
+      "basemodel": "ar-en",
+      "domain": "conversational",
+      "srclang": "en",
+      "destlang": "fr",
+      "password": "qKLU42iUalbL",
+      "custom": "",
+      "domainhidden": "conversational",
+      "srclanghidden": "en",
+      "destlanghidden": "fr",
+      "basemodelhidden": "ar-en",
+      "customhidden": "",
+      "filetype": "forcedglossary",
+      "trainid": "",
+      "x": 531,
+      "y": 395,
+      "wires": [
+        [
+          "a5a9a51e.6d58b8"
+        ]
+      ]
+    },
+    {
+      "id": "97416f4d.f4caa",
+      "type": "inject",
+      "z": "489e4ba7.adbfd4",
+      "name": "Input",
+      "topic": "",
+      "payload": "Hello",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 219.5,
+      "y": 393,
+      "wires": [
+        [
+          "81b10f49.b527"
+        ]
+      ]
+    },
+    {
+      "id": "a5a9a51e.6d58b8",
+      "type": "debug",
+      "z": "489e4ba7.adbfd4",
+      "name": "Display Output",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 933.5,
+      "y": 397,
+      "wires": []
+    },
+    {
+      "id": "63cbcfe7.05ef",
+      "type": "comment",
+      "z": "489e4ba7.adbfd4",
+      "name": "ReadMe",
+      "info": "The credentials need to be provided for \nlanguage translation before executing the flow",
+      "x": 212,
+      "y": 306,
+      "wires": []
+    },
+    {
+      "id": "80b8982a.8feed8",
+      "type": "watson-text-to-speech",
+      "z": "e7e324ab.fe16f8",
+      "name": "",
+      "lang": "english",
+      "voice": "en-US_MichaelVoice",
+      "format": "audio/wav",
+      "x": 455,
+      "y": 342,
+      "wires": [
+        [
+          "833009f8.50e918"
+        ]
+      ]
+    },
+    {
+      "id": "d53fdc6b.6daec",
+      "type": "inject",
+      "z": "e7e324ab.fe16f8",
+      "name": "Input Text",
+      "topic": "",
+      "payload": "n Egyptian man who hijacked an plane during a routine domestic flight to Cairo and forced it to land on the island of Cyprus on Tuesday has surrendered and was taken into custody after he released all the passengers and crew.",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 190.09091186523438,
+      "y": 343.7272644042969,
+      "wires": [
+        [
+          "80b8982a.8feed8"
+        ]
+      ]
+    },
+    {
+      "id": "c77da1eb.eef65",
+      "type": "websocket out",
+      "z": "e7e324ab.fe16f8",
+      "name": "",
+      "server": "79ec9a60.b24714",
+      "client": "",
+      "x": 1051.0908203125,
+      "y": 340.7272644042969,
+      "wires": []
+    },
+    {
+      "id": "4345b161.3f5f1",
+      "type": "http in",
+      "z": "e7e324ab.fe16f8",
+      "name": "HTTP endpoint /audio",
+      "url": "/audio",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 226.81817626953125,
+      "y": 461.3636474609375,
+      "wires": [
+        [
+          "4ca52682.3172c8"
+        ]
+      ]
+    },
+    {
+      "id": "ce74395d.b39428",
+      "type": "http response",
+      "z": "e7e324ab.fe16f8",
+      "name": "HTTP Response",
+      "x": 951.3636474609375,
+      "y": 458.6363525390625,
+      "wires": []
+    },
+    {
+      "id": "4ca52682.3172c8",
+      "type": "template",
+      "z": "e7e324ab.fe16f8",
+      "name": "Function, Listens to websocket /ws/audio",
+      "field": "",
+      "fieldType": "msg",
+      "syntax": "mustache",
+      "template": "<!DOCTYPE html>\n<html>\n<head>\n  <title>IBM Watson - Text To Speech</title>\n  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>\n  \n  <script type=\"text/javascript\">\n    var socketaddy = \"ws://\" + window.location.host + \"/ws/audio\";\n\n    $(document).ready(function(){\n      var output = document.getElementById('output')\n      $('#output').on('playing', function () {\n          $('#text').text('Playing audio.')\n          \n      });\n      $('#output').on('ended', function () {\n          $('#text').text('Waiting for audio...')\n          \n      });\n      sock = new WebSocket(socketaddy);\n      sock.onopen = function(){\n          $('#text').text('Waiting for audio...');\n          console.log(\"Connected websocket\");\n      };\n      sock.onerror = function(){ \n          console.log(\"Websocket error\"); \n      };\n      sock.onclose = function () {\n          $('#text').text('Not connected. Refresh the page?')\n      }\n      sock.onmessage = function(evt){\n        console.log(\"Websocket message\", evt); \n        output.src = window.URL.createObjectURL(evt.data);\n        output.play();\n      };\n    });\n  </script>\n  \n</head>\n<body style=\"font-size: 56px; font-family: helvetica; text-align: center; margin-top: 100px;\">\n  <div id=\"text\">Connecting...</div>\n  <audio id=\"output\"></audio>\n</body>\n</html>",
+      "x": 580.8181762695312,
+      "y": 460.3636474609375,
+      "wires": [
+        [
+          "ce74395d.b39428"
+        ]
+      ]
+    },
+    {
+      "id": "833009f8.50e918",
+      "type": "function",
+      "z": "e7e324ab.fe16f8",
+      "name": "Pass Speech to WebSocket",
+      "func": "msg.payload = msg.speech;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 787.8181762695312,
+      "y": 340.5454406738281,
+      "wires": [
+        [
+          "c77da1eb.eef65"
+        ]
+      ]
+    },
+    {
+      "id": "2a311e1a.6cc6e2",
+      "type": "comment",
+      "z": "e7e324ab.fe16f8",
+      "name": "ReadMe",
+      "info": "The text is injected initially. Text to speech node\nconverts text to speech and send the buffer to\nweb socket.\n\nThe Http request /audio listens to web socket\nand plays when it get the buffer of audio.\n\nNote: Username and password need to be provided\nin text to speech node.",
+      "x": 181.5,
+      "y": 235,
+      "wires": []
+    },
+    {
+      "id": "4ab9716.ce3779",
+      "type": "http in",
+      "z": "a96da409.0ad3d8",
+      "name": "HTTP Endpoint, /findproduct",
+      "url": "/findproduct",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 226,
+      "y": 295,
+      "wires": [
+        [
+          "ad7085b9.3b4bf8"
+        ]
+      ]
+    },
+    {
+      "id": "c5421f51.a2b47",
+      "type": "alchemy-image-analysis",
+      "z": "a96da409.0ad3d8",
+      "name": "AlchemyImage",
+      "apikey": "__PWRD__",
+      "image-feature": "imageKeywords",
+      "x": 641,
+      "y": 433,
+      "wires": [
+        [
+          "e4274026.9c88b",
+          "3486096a.c3f9c6"
+        ]
+      ]
+    },
+    {
+      "id": "d48cefe1.93e",
+      "type": "http response",
+      "z": "a96da409.0ad3d8",
+      "name": "HTTP Response",
+      "x": 786,
+      "y": 294,
+      "wires": []
+    },
+    {
+      "id": "ad7085b9.3b4bf8",
+      "type": "template",
+      "z": "a96da409.0ad3d8",
+      "name": "Home Page HTML",
+      "field": "payload",
+      "fieldType": "msg",
+      "format": "handlebars",
+      "syntax": "plain",
+      "template": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>Analyse the Image</h1>\n    <form action=\"imageresult\" method=\"post\">\n        <label for=\"imageURL\">Title</label>\n        <input type=\"text\" class=\"form-control\" name=\"imageURL\" placeholder=\"Provide the URL of Image...\" />\n        <button type=\"submit\" class=\"btn btn-default\">Analyse Image!!!</button>\n    </form>\n  </body>\n</html>\n",
+      "x": 505,
+      "y": 294,
+      "wires": [
+        [
+          "d48cefe1.93e"
+        ]
+      ]
+    },
+    {
+      "id": "1e5cd691.420539",
+      "type": "http in",
+      "z": "a96da409.0ad3d8",
+      "name": "HTTP Endpoint , /imageresult",
+      "url": "/imageresult",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 230,
+      "y": 440,
+      "wires": [
+        [
+          "5c08f7b0.f78bb8"
+        ]
+      ]
+    },
+    {
+      "id": "5c08f7b0.f78bb8",
+      "type": "function",
+      "z": "a96da409.0ad3d8",
+      "name": "Provide URL",
+      "func": "msg.payload =  msg.payload.imageURL;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 451,
+      "y": 564,
+      "wires": [
+        [
+          "c5421f51.a2b47"
+        ]
+      ]
+    },
+    {
+      "id": "e4274026.9c88b",
+      "type": "debug",
+      "z": "a96da409.0ad3d8",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "result",
+      "x": 873,
+      "y": 565,
+      "wires": []
+    },
+    {
+      "id": "ea6f22d0.0e679",
+      "type": "http response",
+      "z": "a96da409.0ad3d8",
+      "name": "",
+      "x": 1078.5,
+      "y": 432,
+      "wires": []
+    },
+    {
+      "id": "3486096a.c3f9c6",
+      "type": "function",
+      "z": "a96da409.0ad3d8",
+      "name": "Return Result",
+      "func": "msg.payload = msg.result;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 891,
+      "y": 432,
+      "wires": [
+        [
+          "ea6f22d0.0e679"
+        ]
+      ]
+    },
+    {
+      "id": "1d9d03b7.e4b00c",
+      "type": "comment",
+      "z": "a96da409.0ad3d8",
+      "name": "ReadMe",
+      "info": "Provide the URL of the image and click on submit.\nIt will predict what the image consits of.\n\nExample Link : http://i.telegraph.co.uk/multimedia/archive/02722/taj-mahal-deal_2722393b.jpg\nhttp://pngimg.com/upload/iphone_PNG5740.png\n\nFine-tuning of use case is required.",
+      "x": 174,
+      "y": 185,
+      "wires": []
+    },
+    {
+      "id": "e420859f.561288",
+      "type": "watson-speech-to-text",
+      "z": "15eec225.ebca4e",
+      "name": "",
+      "continuous": true,
+      "lang": "en-US",
+      "langhidden": "en-US",
+      "band": "BroadbandModel",
+      "bandhidden": "",
+      "password": "YNA4VcN1AaXY",
+      "x": 603,
+      "y": 418,
+      "wires": [
+        [
+          "9dac9cb1.51637"
+        ]
+      ]
+    },
+    {
+      "id": "b56c49cf.b0dfd8",
+      "type": "comment",
+      "z": "15eec225.ebca4e",
+      "name": "ReadMe",
+      "info": "Link of sound file is injected to the watson speech\nto text node. The node converts the speech to text\nand displays in the debug tab.\n\nNote:UserName and password need to be provided\nin speech to text for auth.",
+      "x": 287,
+      "y": 343,
+      "wires": []
+    },
+    {
+      "id": "8ec24986.a72528",
+      "type": "inject",
+      "z": "15eec225.ebca4e",
+      "name": "Audio File URL",
+      "topic": "",
+      "payload": "https://aacapps.com/lamp/sound/amy.wav",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 308.5,
+      "y": 418,
+      "wires": [
+        [
+          "e420859f.561288"
+        ]
+      ]
+    },
+    {
+      "id": "9dac9cb1.51637",
+      "type": "debug",
+      "z": "15eec225.ebca4e",
+      "name": "Text of the Speech",
+      "active": true,
+      "console": "false",
+      "complete": "transcription",
+      "x": 894,
+      "y": 418,
+      "wires": []
+    },
+    {
+      "id": "6ab31e47.1482",
+      "type": "http in",
+      "z": "bfcf349b.f88f48",
+      "name": "Map Stations HTTP Endpoint",
+      "url": "/mapstations",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 387,
+      "y": 354,
+      "wires": [
+        [
+          "2c7987b3.d7acc8"
+        ]
+      ]
+    },
+    {
+      "id": "b4492110.1d5ca",
+      "type": "http response",
+      "z": "bfcf349b.f88f48",
+      "name": "HTTP Response",
+      "x": 932,
+      "y": 353,
+      "wires": []
+    },
+    {
+      "id": "7a4e793e.fd79e8",
+      "type": "http request",
+      "z": "bfcf349b.f88f48",
+      "name": "HTTP Request to Bart API",
+      "method": "GET",
+      "url": "http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V",
+      "tls": "",
+      "x": 532,
+      "y": 447,
+      "wires": [
+        [
+          "481b8d93.2c6184"
+        ]
+      ]
+    },
+    {
+      "id": "481b8d93.2c6184",
+      "type": "xml",
+      "z": "bfcf349b.f88f48",
+      "name": "XML to JavaScript Object",
+      "attr": "",
+      "chr": "",
+      "x": 830,
+      "y": 448,
+      "wires": [
+        [
+          "22eda637.3bd2ca"
+        ]
+      ]
+    },
+    {
+      "id": "2c7987b3.d7acc8",
+      "type": "template",
+      "z": "bfcf349b.f88f48",
+      "name": "Plot Locations",
+      "field": "payload",
+      "fieldType": "msg",
+      "syntax": "mustache",
+      "template": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\">\n    <meta charset=\"utf-8\">\n    <title>Bart Stations</title>\n    <style>\n      html, body, #map-canvas {\n        height: 100%;\n        margin: 0px;\n        padding: 0px\n      }\n    </style>\n    <script src=\"https://maps.googleapis.com/maps/api/js?v=3.exp\"></script>\n    <script>\n\t\tfunction initialize() {\n\t\t  var myLatlng = new google.maps.LatLng(37.765062,-122.419694);\n\t\t  var mapOptions = {\n\t\t    zoom: 10,\n\t\t    center: myLatlng\n\t\t  };\n\t\t  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);\n\t\t  \n\t\t  var loc = window.location;\n          if (loc.protocol === \"https:\") {\n            newUri = \"wss:\";\n          } else {\n            newUri = \"ws:\";\n          }\n          newUri += \"//\" + loc.host + \"/ws/stations\";\n\t\t  \n\t\t  \n\t\t  var sock = new WebSocket(newUri);\n\t\t  sock.onopen = function(){ \n\t\t    console.log(\"Connected websocket\");\n\t\t    console.log(\"Sending ping..\");\n\t\t\tsock.send(\"Ping!\");\n\t\t    console.log(\"Ping sent..\");\n\t\t  };\n\t\t  sock.onerror = function(){ console.log(\"Websocket error\"); };\n\t\t  sock.onmessage = function(evt){\n\t\t    var stationData = JSON.parse(evt.data);\n\t\t    var stations = stationData.root.stations[0].station;\n\t\t\tfor(var i = 0; i < stations.length; i++) {\n\t\t\t  var station = stations[i];\n              var marker = new google.maps.Marker({\n\t\t\t    position: new google.maps.LatLng(station.gtfs_latitude[0],station.gtfs_longitude[0]),\n\t\t\t    map: map,\n\t\t\t    animation: google.maps.Animation.DROP,\n\t\t\t    title: station.name[0]\n\t\t\t  });\n\t\t\t  \n\t\t\t}\n\t\t  };\n\t\t};\n\t\t\n\t\tgoogle.maps.event.addDomListener(window, 'load', initialize);\n\n    </script>\n  </head>\n  <body>\n    <div id=\"map-canvas\"></div>\n  </body>\n</html>",
+      "x": 671,
+      "y": 354,
+      "wires": [
+        [
+          "b4492110.1d5ca"
+        ]
+      ]
+    },
+    {
+      "id": "7234df96.2f3c6",
+      "type": "websocket in",
+      "z": "bfcf349b.f88f48",
+      "name": "Web Socket",
+      "server": "e01de1e.4c3d62",
+      "client": "",
+      "x": 205,
+      "y": 450,
+      "wires": [
+        [
+          "7a4e793e.fd79e8"
+        ]
+      ]
+    },
+    {
+      "id": "22eda637.3bd2ca",
+      "type": "websocket out",
+      "z": "bfcf349b.f88f48",
+      "name": "Web Socket",
+      "server": "e01de1e.4c3d62",
+      "client": "",
+      "x": 1076,
+      "y": 447,
+      "wires": []
+    },
+    {
+      "id": "a71eaee.2cb0b5",
+      "type": "comment",
+      "z": "bfcf349b.f88f48",
+      "name": "Readme",
+      "info": "Node-Red flow to plot the locations based on co-ordinates on google maps.\n \nSpecifically, this flow adds an HTTP endpoint called /mapstations to your Node-RED instance \nthat when hit returns a Google Map with pins for all\nthe BART stations in San Francisco. The location \ndetails of all BART stations are fetched from API by \nmaking an HTTP request.",
+      "x": 215.5,
+      "y": 281,
+      "wires": []
+    },
+    {
+      "id": "c1e5f2ff.52452",
+      "type": "http request",
+      "z": "e4eb2ffb.d7975",
+      "name": "website availability",
+      "method": "GET",
+      "ret": "txt",
+      "url": "http://www.isup.me/google.com",
+      "x": 243,
+      "y": 289,
+      "wires": [
+        [
+          "1ff76eb9.76b341"
+        ]
+      ]
+    },
+    {
+      "id": "44c388c7.024358",
+      "type": "inject",
+      "z": "e4eb2ffb.d7975",
+      "name": "",
+      "topic": "Trigger",
+      "payload": "",
+      "payloadType": "str",
+      "repeat": "1800",
+      "crontab": "",
+      "once": true,
+      "x": 118.00003051757812,
+      "y": 210,
+      "wires": [
+        [
+          "c1e5f2ff.52452"
+        ]
+      ]
+    },
+    {
+      "id": "1ff76eb9.76b341",
+      "type": "html",
+      "z": "e4eb2ffb.d7975",
+      "name": "Extract Status",
+      "tag": "#container",
+      "ret": "text",
+      "as": "multi",
+      "x": 417.5,
+      "y": 364,
+      "wires": [
+        [
+          "dc835fff.78b9a"
+        ]
+      ]
+    },
+    {
+      "id": "dc835fff.78b9a",
+      "type": "function",
+      "z": "e4eb2ffb.d7975",
+      "name": "Send Status",
+      "func": "var title = 'is up.';\n\nif(msg.payload.indexOf(title) !== -1) {\t\n\tmsg.payload = true;\n}\nelse {\n\tmsg.payload = false;\n}\n\t\nreturn msg;\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 601,
+      "y": 436,
+      "wires": [
+        [
+          "9ddf6fcd.bdfec"
+        ]
+      ]
+    },
+    {
+      "id": "9ddf6fcd.bdfec",
+      "type": "switch",
+      "z": "e4eb2ffb.d7975",
+      "name": "Is Up or Down",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        },
+        {
+          "t": "false"
+        }
+      ],
+      "checkall": "true",
+      "outputs": 2,
+      "x": 811,
+      "y": 512,
+      "wires": [
+        [],
+        [
+          "f243ecfb.18b55"
+        ]
+      ]
+    },
+    {
+      "id": "abae14be.799a58",
+      "type": "delay",
+      "z": "e4eb2ffb.d7975",
+      "name": "Rate limiter",
+      "pauseType": "rate",
+      "timeout": "5",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "rateUnits": "day",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": true,
+      "x": 995,
+      "y": 692,
+      "wires": [
+        [
+          "1ac25c24.11cc34"
+        ]
+      ]
+    },
+    {
+      "id": "1ac25c24.11cc34",
+      "type": "twilio out",
+      "z": "e4eb2ffb.d7975",
+      "service": "_ext_",
+      "twilio": "1fc0a261.9d4afe",
+      "from": "",
+      "number": "+17045267752",
+      "name": "Send SMS to Mobile",
+      "x": 1247,
+      "y": 691,
+      "wires": []
+    },
+    {
+      "id": "f243ecfb.18b55",
+      "type": "function",
+      "z": "e4eb2ffb.d7975",
+      "name": "Compose SMS ",
+      "func": "msg.payload = \"Website is down !! From NodeRed-Twilio\"\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 915.5,
+      "y": 592,
+      "wires": [
+        [
+          "abae14be.799a58"
+        ]
+      ]
+    },
+    {
+      "id": "6296c335.2fd39c",
+      "type": "comment",
+      "z": "e4eb2ffb.d7975",
+      "name": "ReadME",
+      "info": "Checks the staus of website in isup.me and sends\na SMS using twillio if the website is done. \nMessages can be configured periodically.\n\nNodes Used:\nInject\nHTTP\nHTML\nFunction\nSwitch\nTwillio\nRate Limiter",
+      "x": 105.5,
+      "y": 152,
+      "wires": []
+    },
+    {
+      "id": "18e09298.31f7ed",
+      "type": "http in",
+      "z": "b3976def.673b2",
+      "name": "HTT Endpoint - /public/posts - GET",
+      "url": "/public/posts",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 273,
+      "y": 253,
+      "wires": [
+        [
+          "b79fabd7.6b8458"
+        ]
+      ]
+    },
+    {
+      "id": "7df01f9.282ade",
+      "type": "template",
+      "z": "b3976def.673b2",
+      "name": "Front End Webpage HTML",
+      "field": "payload",
+      "fieldType": "msg",
+      "format": "handlebars",
+      "syntax": "mustache",
+      "template": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>My Micro Blog</h1>\n    <form action=\"posts\" method=\"post\">\n        <label for=\"title\">Title</label>\n        <input type=\"text\" class=\"form-control\" name=\"title\" placeholder=\"Title…\" />\n        <label for=\"post\">Post Content</label>\n        <input type=\"text\" class=\"form-control\" name=\"post\" placeholder=\"Say something…\" />\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n    </form>\n    <div>\n        {{#payload}}\n        <div class=\"post\">\n            <h3>{{title}}</h3>\n            <p>{{post}}</p>\n        </div>\n        {{/payload}}\n    </div>\n  </body>\n</html>",
+      "x": 727.5,
+      "y": 244,
+      "wires": [
+        [
+          "b5901616.5aa788"
+        ]
+      ]
+    },
+    {
+      "id": "b5901616.5aa788",
+      "type": "http response",
+      "z": "b3976def.673b2",
+      "name": "HTTP Response",
+      "x": 947.5,
+      "y": 375,
+      "wires": []
+    },
+    {
+      "id": "b79fabd7.6b8458",
+      "type": "mongodb in",
+      "z": "b3976def.673b2",
+      "service": "_ext_",
+      "mongodb": "6a5939b.58483c8",
+      "name": "Get From MongoDB",
+      "collection": "posts",
+      "operation": "find",
+      "x": 501.5,
+      "y": 375,
+      "wires": [
+        [
+          "7df01f9.282ade"
+        ]
+      ]
+    },
+    {
+      "id": "23877abf.8f0506",
+      "type": "http in",
+      "z": "b3976def.673b2",
+      "name": "HTT Endpoint - /public/posts - POST",
+      "url": "/public/posts",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 257.5,
+      "y": 601,
+      "wires": [
+        [
+          "f7c9a00.5d4cf6",
+          "308bcfee.4b53a"
+        ]
+      ]
+    },
+    {
+      "id": "308bcfee.4b53a",
+      "type": "function",
+      "z": "b3976def.673b2",
+      "name": "Build response object",
+      "func": "msg.headers = {\n    \"Location\" : \"http://noderedexample.mybluemix.net/public/posts\"\n};\nmsg.statusCode = 302;\nreturn msg;\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 592.5,
+      "y": 524,
+      "wires": [
+        [
+          "3f09baba.243976"
+        ]
+      ]
+    },
+    {
+      "id": "f7c9a00.5d4cf6",
+      "type": "mongodb out",
+      "z": "b3976def.673b2",
+      "service": "_ext_",
+      "mongodb": "6a5939b.58483c8",
+      "name": "Insert into MongoDB",
+      "collection": "posts",
+      "payonly": true,
+      "upsert": false,
+      "multi": false,
+      "operation": "insert",
+      "x": 581.5,
+      "y": 685,
+      "wires": []
+    },
+    {
+      "id": "3f09baba.243976",
+      "type": "http response",
+      "z": "b3976def.673b2",
+      "name": "HTTP Response",
+      "x": 959.5,
+      "y": 520,
+      "wires": []
+    },
+    {
+      "id": "d43755a5.43c248",
+      "type": "comment",
+      "z": "b3976def.673b2",
+      "name": "Get Request",
+      "info": "",
+      "x": 205.5,
+      "y": 201,
+      "wires": []
+    },
+    {
+      "id": "782e94b3.bcd21c",
+      "type": "comment",
+      "z": "b3976def.673b2",
+      "name": "Post Request",
+      "info": "",
+      "x": 179,
+      "y": 554,
+      "wires": []
+    },
+    {
+      "id": "1c3fd6eb.e85ff9",
+      "type": "comment",
+      "z": "b3976def.673b2",
+      "name": "ReadMe",
+      "info": "Using the MongoDB node as a storage for posts, \nhttp nodes to provide end points for the service and\nthe html node to format the micro-blog web page.\n\nNodes Used:\nHTTP in\nHTTP out\nTemplate\nMongoDB\nfunction",
+      "x": 198.5,
+      "y": 146,
+      "wires": []
+    },
+    {
+      "id": "3c4170c8.8521f",
+      "type": "http request",
+      "z": "b99f6b2f.612348",
+      "name": "CSV File online request",
+      "method": "GET",
+      "url": "https://dl.dropboxusercontent.com/u/868549/graph/data.txt",
+      "x": 431,
+      "y": 369,
+      "wires": [
+        [
+          "b2f87338.74c65"
+        ]
+      ]
+    },
+    {
+      "id": "8824bc4b.3f672",
+      "type": "inject",
+      "z": "b99f6b2f.612348",
+      "name": "Inject at deploy , can be scheduled",
+      "topic": "",
+      "payload": "",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 222,
+      "y": 268,
+      "wires": [
+        [
+          "3c4170c8.8521f"
+        ]
+      ]
+    },
+    {
+      "id": "24e9403d.3b1d6",
+      "type": "cloudant out",
+      "z": "b99f6b2f.612348",
+      "name": "Insert into Cloudant DB",
+      "cloudant": "988dd1f1.e7df8",
+      "database": "dumpcsv",
+      "service": "nodeRedExample-cloudantNoSQLDB",
+      "payonly": true,
+      "operation": "insert",
+      "x": 1074,
+      "y": 613,
+      "wires": []
+    },
+    {
+      "id": "5d6fa18c.3c49a",
+      "type": "json",
+      "z": "b99f6b2f.612348",
+      "name": "Convert to JSON String",
+      "x": 796.5,
+      "y": 516,
+      "wires": [
+        [
+          "24e9403d.3b1d6",
+          "d4d26908.e643d8"
+        ]
+      ]
+    },
+    {
+      "id": "b2f87338.74c65",
+      "type": "csv",
+      "z": "b99f6b2f.612348",
+      "name": "Convert CSV file to JavaScript Object",
+      "sep": ",",
+      "hdrin": "",
+      "hdrout": "",
+      "multi": "one",
+      "ret": "\\n",
+      "temp": "",
+      "x": 685,
+      "y": 438,
+      "wires": [
+        [
+          "5d6fa18c.3c49a"
+        ]
+      ]
+    },
+    {
+      "id": "d4d26908.e643d8",
+      "type": "debug",
+      "z": "b99f6b2f.612348",
+      "name": "Debug",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 1017,
+      "y": 394,
+      "wires": []
+    },
+    {
+      "id": "e751e586.d90fd8",
+      "type": "comment",
+      "z": "b99f6b2f.612348",
+      "name": "ReadMe",
+      "info": "The CSV input file is converted to JSON and inserted\nin the Cloudent Database\n\nNodes Used:\nInject\nHttp\nCSV\nJSON\nDebug\nCloudant",
+      "x": 132.5,
+      "y": 194,
+      "wires": []
+    },
+    {
+      "id": "3b7ce16.a65ad1e",
+      "type": "redis-command",
+      "z": "1476a607.94f83a",
+      "server": "6f6fbb84.214b64",
+      "command": "set",
+      "name": "Redis Database",
+      "topic": "",
+      "x": 701,
+      "y": 390,
+      "wires": [
+        [
+          "52670fb3.5df3a"
+        ]
+      ]
+    },
+    {
+      "id": "b8f3fc72.2d41a",
+      "type": "inject",
+      "z": "1476a607.94f83a",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 172.5,
+      "y": 388,
+      "wires": [
+        [
+          "44a7c128.9640b"
+        ]
+      ]
+    },
+    {
+      "id": "52670fb3.5df3a",
+      "type": "debug",
+      "z": "1476a607.94f83a",
+      "name": "Debug",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 1001.5,
+      "y": 391,
+      "wires": []
+    },
+    {
+      "id": "44a7c128.9640b",
+      "type": "function",
+      "z": "1476a607.94f83a",
+      "name": "Key Value Pair ",
+      "func": "var msg = {payload:[\"HI2\",\"There Again\"]}\nreturn msg",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 415.5,
+      "y": 388,
+      "wires": [
+        [
+          "3b7ce16.a65ad1e"
+        ]
+      ]
+    },
+    {
+      "id": "c221565f.639008",
+      "type": "comment",
+      "z": "1476a607.94f83a",
+      "name": "ReadMe",
+      "info": "",
+      "x": 169.5,
+      "y": 298,
+      "wires": []
+    },
+    {
+      "id": "5a1d07ba.222a38",
+      "type": "inject",
+      "z": "76747bdb.c001a4",
+      "name": "Input",
+      "topic": "",
+      "payload": "When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation. We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.--That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed, --That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their Safety and Happiness. Prudence, indeed, will dictate that Governments long established should not be changed for light and transient causes; and accordingly all experience hath shewn, that mankind are more disposed to suffer, while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed. But when a long train of abuses and usurpations, pursuing invariably the same Object evinces a design to reduce them under absolute Despotism, it is their right, it is their duty, to throw off such Government, and to provide new Guards for their future security.--Such has been the patient sufferance of these Colonies; and such is now the necessity which constrains them to alter their former Systems of Government. The history of the present King of Great Britain is a history of repeated injuries and usurpations, all having in direct object the establishment of an absolute Tyranny over these States. To prove this, let Facts be submitted to a candid world.",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 284,
+      "y": 350,
+      "wires": [
+        [
+          "ce3c2dd.7e994d"
+        ]
+      ]
+    },
+    {
+      "id": "1caba9fa.c37eb6",
+      "type": "debug",
+      "z": "76747bdb.c001a4",
+      "name": "Display Output",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 930.5,
+      "y": 347,
+      "wires": []
+    },
+    {
+      "id": "ce3c2dd.7e994d",
+      "type": "watson-concept-insights-search",
+      "z": "76747bdb.c001a4",
+      "name": "",
+      "corpus": "34c6aad3.c286b6",
+      "mode": "corpus",
+      "docapicall": "annotations",
+      "corpusapicall": "relatedconcepts",
+      "docname": "",
+      "query": "",
+      "x": 605,
+      "y": 349,
+      "wires": [
+        [
+          "1caba9fa.c37eb6"
+        ]
+      ]
+    },
+    {
+      "id": "c11cb1ad.82857",
+      "type": "comment",
+      "z": "76747bdb.c001a4",
+      "name": "ReadMe",
+      "info": "The credentials need to be provided for \nconcept insights search before executing the flow",
+      "x": 280.5,
+      "y": 265,
+      "wires": []
+    },
+    {
+      "id": "5c92b1f4.e34f9",
+      "type": "convert",
+      "z": "267ebb2d.871184",
+      "name": "Document Conversion",
+      "target": "NORMALIZED_TEXT",
+      "username": "77c1f4a5-fcff-4407-bfef-c590adaa9066",
+      "password": "BLchTTXCBJk6",
+      "service": "_ext_",
+      "x": 572,
+      "y": 380,
+      "wires": [
+        [
+          "4ddcf7d6.4398b8"
+        ]
+      ]
+    },
+    {
+      "id": "4ddcf7d6.4398b8",
+      "type": "debug",
+      "z": "267ebb2d.871184",
+      "name": "PDF to Normalized Text",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 928.5,
+      "y": 376,
+      "wires": []
+    },
+    {
+      "id": "eeab9403.f52468",
+      "type": "inject",
+      "z": "267ebb2d.871184",
+      "name": "",
+      "topic": "",
+      "payload": "https://www.usenix.org/legacy/events/lisa11/tech/slides/perrone.pdf",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 202,
+      "y": 382,
+      "wires": [
+        [
+          "5c92b1f4.e34f9"
+        ]
+      ]
+    },
+    {
+      "id": "e1d96fce.38be",
+      "type": "debug",
+      "z": "e94541b2.84fbe",
+      "name": "Result",
+      "active": true,
+      "console": "false",
+      "complete": "result",
+      "x": 803,
+      "y": 338,
+      "wires": []
+    },
+    {
+      "id": "92068649.6f7cd8",
+      "type": "watson-conversation-v1-experimental",
+      "z": "e94541b2.84fbe",
+      "name": "",
+      "workspaceid": "e33d0e94-550d-404c-8afd-ec8e0dfed6c4",
+      "x": 545,
+      "y": 341,
+      "wires": [
+        [
+          "e1d96fce.38be"
+        ]
+      ]
+    },
+    {
+      "id": "bbcf122c.e1fa2",
+      "type": "inject",
+      "z": "e94541b2.84fbe",
+      "name": "Input",
+      "topic": "",
+      "payload": "What can you do?",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 254,
+      "y": 342,
+      "wires": [
+        [
+          "92068649.6f7cd8"
+        ]
+      ]
+    },
+    {
+      "id": "ae422584.5e1938",
+      "type": "service-dialog",
+      "z": "23eee02d.ad562",
+      "name": "",
+      "mode": "list",
+      "dialog": "",
+      "clientid": "",
+      "converse": "",
+      "x": 579,
+      "y": 313,
+      "wires": [
+        [
+          "3a3b4199.e0aede"
+        ]
+      ]
+    },
+    {
+      "id": "fc2e6b14.ff26a8",
+      "type": "inject",
+      "z": "23eee02d.ad562",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 294.5,
+      "y": 312,
+      "wires": [
+        [
+          "ae422584.5e1938"
+        ]
+      ]
+    },
+    {
+      "id": "3a3b4199.e0aede",
+      "type": "debug",
+      "z": "23eee02d.ad562",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "dialog",
+      "x": 846.5,
+      "y": 311,
+      "wires": []
+    },
+    {
+      "id": "cb415af5.39e998",
+      "type": "watson-natural-language-classifier",
+      "z": "f33ac66.9a75638",
+      "name": "",
+      "mode": "classify",
+      "language": "en",
+      "classifier": "2374f9x69-nlc-7541",
+      "x": 587,
+      "y": 355,
+      "wires": [
+        [
+          "bf0a5ac3.b7ed78"
+        ]
+      ]
+    },
+    {
+      "id": "24b8b023.b9e4e",
+      "type": "inject",
+      "z": "f33ac66.9a75638",
+      "name": "",
+      "topic": "",
+      "payload": "Is it sunny?",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 281,
+      "y": 358,
+      "wires": [
+        [
+          "cb415af5.39e998"
+        ]
+      ]
+    },
+    {
+      "id": "bf0a5ac3.b7ed78",
+      "type": "debug",
+      "z": "f33ac66.9a75638",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 871,
+      "y": 355,
+      "wires": []
+    },
+    {
+      "id": "2ab35dcd.bab732",
+      "type": "news",
+      "z": "8666124.336bcf",
+      "name": "",
+      "service": "_ext_",
+      "key": "5fc91e98eacfa5ebf83440e8c6a61d0f60fa380b",
+      "start": "06/29/2016",
+      "end": "07/01/2016",
+      "query": "",
+      "custom": true,
+      "queries": [],
+      "results": [],
+      "max": 10,
+      "mode": "json",
+      "x": 597,
+      "y": 297,
+      "wires": [
+        [
+          "2a9924a.277d7dc"
+        ]
+      ]
+    },
+    {
+      "id": "90a40cf9.c6d6b",
+      "type": "inject",
+      "z": "8666124.336bcf",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 290.5,
+      "y": 294,
+      "wires": [
+        [
+          "2ab35dcd.bab732"
+        ]
+      ]
+    },
+    {
+      "id": "2a9924a.277d7dc",
+      "type": "debug",
+      "z": "8666124.336bcf",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 894.5,
+      "y": 295,
+      "wires": []
+    },
+    {
+      "id": "c153c148.df544",
+      "type": "watson-personality-insights",
+      "z": "9a7b67b5.c6c4e8",
+      "name": "",
+      "lang": "en",
+      "x": 677,
+      "y": 301,
+      "wires": [
+        [
+          "e86323e4.2c945"
+        ]
+      ]
+    },
+    {
+      "id": "96bebb16.435e28",
+      "type": "inject",
+      "z": "9a7b67b5.c6c4e8",
+      "name": "Input",
+      "topic": "",
+      "payload": "Call me Ishmael. Some years ago-never mind how long precisely-having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off-then, I account it high time to get to sea as soon as I can.",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 389,
+      "y": 301,
+      "wires": [
+        [
+          "c153c148.df544"
+        ]
+      ]
+    },
+    {
+      "id": "e86323e4.2c945",
+      "type": "debug",
+      "z": "9a7b67b5.c6c4e8",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "insights",
+      "x": 962,
+      "y": 301,
+      "wires": []
+    },
+    {
+      "id": "60a25f38.98471",
+      "type": "watson-relationship-extraction",
+      "z": "9f6272aa.ab50a",
+      "name": "",
+      "dataset": "ie-en-news",
+      "x": 612,
+      "y": 264,
+      "wires": [
+        [
+          "dad88cbf.613ff"
+        ]
+      ]
+    },
+    {
+      "id": "daf50d4f.803fd",
+      "type": "inject",
+      "z": "9f6272aa.ab50a",
+      "name": "Input",
+      "topic": "",
+      "payload": "IBM Watson developer cloud",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 287,
+      "y": 267,
+      "wires": [
+        [
+          "60a25f38.98471"
+        ]
+      ]
+    },
+    {
+      "id": "dad88cbf.613ff",
+      "type": "debug",
+      "z": "9f6272aa.ab50a",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "relationships",
+      "x": 923,
+      "y": 262,
+      "wires": []
+    },
+    {
+      "id": "55f8b4b7.cfe09c",
+      "type": "watson-tone-analyzer-v3",
+      "z": "d90c57bd.66cf38",
+      "name": "",
+      "tones": "all",
+      "sentences": "true",
+      "contentType": "false",
+      "x": 632,
+      "y": 290,
+      "wires": [
+        [
+          "9cf9ffe2.77b7e"
+        ]
+      ]
+    },
+    {
+      "id": "4a676d2.8bf8194",
+      "type": "inject",
+      "z": "d90c57bd.66cf38",
+      "name": "",
+      "topic": "",
+      "payload": "I know the times are difficult! Our sales have been disappointing for the past three quarters for our data analytics product suite. We have a competitive data analytics product suite in the industry. But we need to do our job selling it! We need to acknowledge and fix our sales challenges. We can’t blame the economy for our lack of execution! We are missing critical sales opportunities. Our product is in no way inferior to the competitor products. Our clients are hungry for analytical tools to improve their business outcomes. Economy has nothing to do with it.",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 209.5,
+      "y": 291,
+      "wires": [
+        [
+          "55f8b4b7.cfe09c"
+        ]
+      ]
+    },
+    {
+      "id": "9cf9ffe2.77b7e",
+      "type": "debug",
+      "z": "d90c57bd.66cf38",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "response",
+      "x": 959.5,
+      "y": 292,
+      "wires": []
+    },
+    {
+      "id": "299b7fed.1d00e",
+      "type": "visual-recognition-v3",
+      "z": "c1bdad31.8d1e8",
+      "name": "",
+      "apikey": "d2834f0879e7c19aa3c76af3840b6ac33587c21a",
+      "image-feature": "detectFaces",
+      "x": 571,
+      "y": 279,
+      "wires": [
+        [
+          "460d98bd.233f68"
+        ]
+      ]
+    },
+    {
+      "id": "4e3505cf.8f95dc",
+      "type": "inject",
+      "z": "c1bdad31.8d1e8",
+      "name": "",
+      "topic": "",
+      "payload": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/first-family/44_barack_obama%5B1%5D.jpg",
+      "payloadType": "str",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 250.5,
+      "y": 278,
+      "wires": [
+        [
+          "299b7fed.1d00e"
+        ]
+      ]
+    },
+    {
+      "id": "460d98bd.233f68",
+      "type": "debug",
+      "z": "c1bdad31.8d1e8",
+      "name": "Output",
+      "active": true,
+      "console": "false",
+      "complete": "result",
+      "x": 931.5,
+      "y": 282,
+      "wires": []
+    },
+    {
+      "id": "9d476893.28d0b8",
+      "type": "watson-tradeoff-analytics",
+      "z": "9857c5bc.42c618",
+      "name": "",
+      "x": 693,
+      "y": 299,
+      "wires": [
+        [
+          "314ecb7d.7a62d4"
+        ]
+      ]
+    },
+    {
+      "id": "77b17cf2.c73084",
+      "type": "inject",
+      "z": "9857c5bc.42c618",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "x": 198,
+      "y": 202,
+      "wires": [
+        [
+          "e33d9612.8da598"
+        ]
+      ]
+    },
+    {
+      "id": "e33d9612.8da598",
+      "type": "function",
+      "z": "9857c5bc.42c618",
+      "name": "Input Data",
+      "func": "msg = {\n  \"payload\": \"phone\",\n  \"columns\": [\n    {\n      \"key\": \"price\",\n      \"type\": \"numeric\",\n      \"goal\": \"min\",\n      \"full_name\": \"Price\",\n      \"is_objective\": true,\n      \"format\": \"â‚¬####0.00\"\n    },\n    {\n      \"key\": \"brand\",\n      \"type\": \"categorical\",\n      \"goal\": \"min\",\n      \"full_name\": \"Brand\",\n      \"is_objective\": true,\n      \"range\": [\n        \"Samsung\",\n        \"Apple\",\n        \"HTC\",\n        \"LG\",\n        \"Nokia\",\n        \"Sony\"\n      ],\n      \"preference\": [\n        \"Samsung\",\n        \"Apple\",\n        \"HTC\",\n        \"LG\",\n        \"Nokia\",\n        \"Sony\"\n      ]\n    },\n    {\n      \"key\": \"RAM\",\n      \"type\": \"numeric\",\n      \"goal\": \"max\",\n      \"full_name\": \"RAM (MB)\",\n      \"is_objective\": false\n    },\n    {\n      \"key\": \"screen_size\",\n      \"type\": \"numeric\",\n      \"goal\": \"max\",\n      \"full_name\": \"Screen (inch)\",\n      \"is_objective\": true\n    },\n    {\n      \"key\": \"camera\",\n      \"type\": \"numeric\",\n      \"goal\": \"max\",\n      \"full_name\": \"Camera\",\n      \"is_objective\": false,\n      \"format\": \"####0 MP\"\n    },\n    {\n      \"key\": \"memory_size\",\n      \"type\": \"numeric\",\n      \"goal\": \"max\",\n      \"full_name\": \"Memory\",\n      \"is_objective\": false,\n      \"format\": \"####0 GB\"\n    },\n    {\n      \"key\": \"battery\",\n      \"type\": \"numeric\",\n      \"goal\": \"max\",\n      \"full_name\": \"Battery (mAh)\",\n      \"is_objective\": false\n    },\n    {\n      \"key\": \"weight\",\n      \"type\": \"numeric\",\n      \"goal\": \"min\",\n      \"full_name\": \"Weight\",\n      \"is_objective\": true,\n      \"format\": \"####0 g\"\n    },\n    {\n      \"key\": \"rDate\",\n      \"type\": \"datetime\",\n      \"goal\": \"max\",\n      \"full_name\": \"Release Date\",\n      \"is_objective\": false\n    }\n  ],\n  \"options\": [\n    {\n      \"key\": \" 1\",\n      \"name\": \"Samsung Galaxy S4 White\",\n      \"values\": {\n        \"weight\": 130,\n        \"price\": 239,\n        \"RAM\": 2048,\n        \"battery\": 2600,\n        \"camera\": 13,\n        \"memory_size\": 16,\n        \"screen_size\": 5,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2013-04-29T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Samsung_GALAXY_S4_zoom_%28White%29.jpg/800px-Samsung_GALAXY_S4_zoom_%28White%29.jpg'/> <a title='Photo by Samsung Belgium (Flickr: GALAXY S4 zoom (1)) [CC BY 2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Samsung_GALAXY_S4_zoom_(White).jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"2\",\n      \"name\": \"Samsung Galaxy S4 Black\",\n      \"values\": {\n        \"weight\": 130,\n        \"price\": 239,\n        \"RAM\": 2048,\n        \"battery\": 2600,\n        \"camera\": 13,\n        \"memory_size\": 16,\n        \"screen_size\": 5,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2013-04-29T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Samsung_Galaxy_S4.jpg/200px-Samsung_Galaxy_S4.jpg'/><a title='Photo by Karlis Dambrans (Flickr: Samsung Galaxy S4) [CC BY 2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S4.jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"3\",\n      \"name\": \"Samsung Galaxy S3 White\",\n      \"values\": {\n        \"weight\": 133,\n        \"price\": 79,\n        \"RAM\": 2048,\n        \"battery\": 2100,\n        \"camera\": 8,\n        \"memory_size\": 16,\n        \"screen_size\": 4.8,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2012-05-29T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Samsung_Galaxy_S_III.png/300px-Samsung_Galaxy_S_III.png'/> <a title='Photo by GalaxyOptimus (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S_III.png' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"4\",\n      \"name\": \"Samsung Galaxy S3 Blue\",\n      \"values\": {\n        \"weight\": 133,\n        \"price\": 79,\n        \"RAM\": 2048,\n        \"battery\": 2100,\n        \"camera\": 8,\n        \"memory_size\": 16,\n        \"screen_size\": 4.8,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2012-05-29T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Samsung_Galaxy_S_Advance_i9070.JPG/250px-Samsung_Galaxy_S_Advance_i9070.JPG'/> <a title='Photo by Macs79 (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S_Advance_i9070.JPG' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"5\",\n      \"name\": \"Samsung Galaxy S3 mini White\",\n      \"values\": {\n        \"weight\": 111,\n        \"price\": 299,\n        \"RAM\": 1024,\n        \"battery\": 1000,\n        \"camera\": 5,\n        \"memory_size\": 8,\n        \"screen_size\": 4,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2012-10-01T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Samsung_Galaxy_S_III_mini.png/300px-Samsung_Galaxy_S_III_mini.png'/> <a title='Photo by GalaxyOptimus (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S_III_mini.png' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"6\",\n      \"name\": \"Apple iPhone 5 White\",\n      \"values\": {\n        \"weight\": 112,\n        \"price\": 449,\n        \"RAM\": 1024,\n        \"battery\": 1440,\n        \"camera\": 8,\n        \"memory_size\": 32,\n        \"screen_size\": 4,\n        \"brand\": \"Apple\",\n        \"rDate\": \"2012-09-21T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/IPhone5white.png/228px-IPhone5white.png'/> <a title='Photo by Pixeden.com [CC BY 3.0 (http://creativecommons.org/licenses/by/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:IPhone5white.png' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"7\",\n      \"name\": \"Apple iPhone 5 Black\",\n      \"values\": {\n        \"weight\": 112,\n        \"price\": 449,\n        \"RAM\": 1024,\n        \"battery\": 1440,\n        \"camera\": 8,\n        \"memory_size\": 32,\n        \"screen_size\": 4,\n        \"brand\": \"Apple\",\n        \"rDate\": \"2012-09-21T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/IPhone_5.png/300px-IPhone_5.png'/> <a title='Photo by Zach Vega (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:IPhone_5.png' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"9\",\n      \"name\": \"HTC One\",\n      \"values\": {\n        \"weight\": 143,\n        \"price\": 189,\n        \"RAM\": 2048,\n        \"battery\": 2300,\n        \"camera\": 4,\n        \"memory_size\": 32,\n        \"screen_size\": 4.7,\n        \"brand\": \"HTC\",\n        \"rDate\": \"2013-03-01T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/7/70/HTC_One.png/149px-HTC_One.png'/> <a title='Photo by M0rphzone (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:HTC_One.png' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"10\",\n      \"name\": \"LG Optimus G\",\n      \"values\": {\n        \"weight\": 145,\n        \"price\": 189,\n        \"RAM\": 1024,\n        \"battery\": 2100,\n        \"camera\": 13,\n        \"memory_size\": 32,\n        \"screen_size\": 4.7,\n        \"brand\": \"LG\",\n        \"rDate\": \"2012-09-19T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/LG_Optimus_G_%28Black%29.jpg/330px-LG_Optimus_G_%28Black%29.jpg'/> <a title='[CC BY 2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:LG_Optimus_G_(Black).jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"11\",\n      \"name\": \"Nokia Lumia 520\",\n      \"values\": {\n        \"weight\": 124,\n        \"price\": 199,\n        \"RAM\": 512,\n        \"battery\": 1430,\n        \"camera\": 5,\n        \"memory_size\": 8,\n        \"screen_size\": 4,\n        \"brand\": \"Nokia\",\n        \"rDate\": \"2013-02-25T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Lumia_520.jpg/450px-Lumia_520.jpg'/> <a title='Photo by Krby Dambrns from Latvia (MWC Barcelona 2013 260  Uploaded by RaviC) [CC BY 2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Lumia_520.jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"13\",\n      \"name\": \"Samsung Galaxy Ace 2 Black\",\n      \"values\": {\n        \"weight\": 122,\n        \"price\": 220,\n        \"RAM\": 768,\n        \"battery\": 1000,\n        \"camera\": 5,\n        \"memory_size\": 4,\n        \"screen_size\": 3.8,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2012-02-05T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Front_Ace_2.JPG/330px-Front_Ace_2.JPG'/> <a title='Photo by Fan samsung ace2 (Own work) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Front_Ace_2.JPG' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"14\",\n      \"name\": \"Samsung Galaxy Mini 2 Black\",\n      \"values\": {\n        \"weight\": 105,\n        \"price\": 220,\n        \"RAM\": 512,\n        \"battery\": 1300,\n        \"camera\": 3.15,\n        \"memory_size\": 4,\n        \"screen_size\": 3.27,\n        \"brand\": \"Samsung\",\n        \"rDate\": \"2012-02-05T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/GT-S6500L.jpg/375px-GT-S6500L.jpg'/> <a title='Photo by Eriqvaldezz (Own work) [GFDL (http://www.gnu.org/copyleft/fdl.html) or CC BY 3.0 (http://creativecommons.org/licenses/by/3.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:GT-S6500L.jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    },\n    {\n      \"key\": \"15\",\n      \"name\": \"Sony Xperia P Silver\",\n      \"values\": {\n        \"weight\": 120,\n        \"price\": 255,\n        \"RAM\": 1024,\n        \"battery\": 1305,\n        \"camera\": 8,\n        \"memory_size\": 16,\n        \"screen_size\": 4,\n        \"brand\": \"Sony\",\n        \"rDate\": \"2012-02-27T00:00:00Z\"\n      },\n      \"description_html\": \"<img style='max-height: 100px; max-width: 100px;'  src='http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Xperia_P.jpg/330px-Xperia_P.jpg'/> <a title='Photo by vsy (http://www.flickr.com/photos/vsy/7176314726/) [CC BY-SA 2.0 (http://creativecommons.org/licenses/by-sa/2.0)], via Wikimedia Commons' href='http://commons.wikimedia.org/wiki/File:Xperia_P.jpg' target='_blank'> <img style='max-height: 14px; max-width: 14px;'  src='http://mirrors.creativecommons.org/presskit/icons/cc.png'/> </a>\"\n    }\n  ]\n}\n\nreturn msg;\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 482,
+      "y": 203,
+      "wires": [
+        [
+          "9d476893.28d0b8"
+        ]
+      ]
+    },
+    {
+      "id": "314ecb7d.7a62d4",
+      "type": "debug",
+      "z": "9857c5bc.42c618",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "resolution",
+      "x": 935,
+      "y": 434,
+      "wires": []
+    },
+    {
+      "id": "d5d28de8.94782",
+      "type": "inject",
+      "z": "f57b8526.d67de8",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 297,
+      "y": 316,
+      "wires": [
+        [
+          "be96484e.329928"
+        ]
+      ]
+    },
+    {
+      "id": "be96484e.329928",
+      "type": "watson-retrieve-rank-create-cluster",
+      "z": "f57b8526.d67de8",
+      "name": "",
+      "servicecreds": "9548859f.def7c8",
+      "clustername": "mycluster",
+      "clustersize": "free",
+      "x": 588,
+      "y": 317,
+      "wires": [
+        [
+          "fbab781d.e29688"
+        ]
+      ]
+    },
+    {
+      "id": "fbab781d.e29688",
+      "type": "debug",
+      "z": "f57b8526.d67de8",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "payload",
+      "x": 912,
+      "y": 317,
+      "wires": []
+    },
+    {
+      "id": "bfa6b706.c4f8d8",
+      "type": "comment",
+      "z": "f57b8526.d67de8",
+      "name": "Create a Cluster",
+      "info": "",
+      "x": 309,
+      "y": 255,
+      "wires": []
+    }
+ ]
