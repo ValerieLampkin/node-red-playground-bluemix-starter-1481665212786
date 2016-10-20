@@ -1,4 +1,4 @@
-﻿[
+[
     {
       "id": "cf80eeaa.d850d",
       "type": "tab",
@@ -135,19 +135,19 @@
       "label": "w9. Tone Analyzer"
     },
     {
-      "id": "c1bdad31.8d1e8",
-      "type": "tab",
-      "label": "w10. Visual Recognition"
-    },
-    {
       "id": "9857c5bc.42c618",
       "type": "tab",
-      "label": "w11. Tradeoff Analytics"
+      "label": "w10. Tradeoff Analytics"
     },
     {
       "id": "f57b8526.d67de8",
       "type": "tab",
-      "label": "w12. Rank and Retrieve"
+      "label": "w11. Rank and Retrieve"
+    },
+    {
+      "id": "987fb89b.e471f8",
+      "type": "tab",
+      "label": "p1. palyground nodes demo"
     },
     {
       "id": "79ec9a60.b24714",
@@ -2384,52 +2384,7 @@
       "y": 292,
       "wires": []
     },
-    {
-      "id": "299b7fed.1d00e",
-      "type": "visual-recognition-v3",
-      "z": "c1bdad31.8d1e8",
-      "name": "",
-      "apikey": "d2834f0879e7c19aa3c76af3840b6ac33587c21a",
-      "image-feature": "detectFaces",
-      "x": 571,
-      "y": 279,
-      "wires": [
-        [
-          "460d98bd.233f68"
-        ]
-      ]
-    },
-    {
-      "id": "4e3505cf.8f95dc",
-      "type": "inject",
-      "z": "c1bdad31.8d1e8",
-      "name": "",
-      "topic": "",
-      "payload": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/first-family/44_barack_obama%5B1%5D.jpg",
-      "payloadType": "str",
-      "repeat": "",
-      "crontab": "",
-      "once": true,
-      "x": 250.5,
-      "y": 278,
-      "wires": [
-        [
-          "299b7fed.1d00e"
-        ]
-      ]
-    },
-    {
-      "id": "460d98bd.233f68",
-      "type": "debug",
-      "z": "c1bdad31.8d1e8",
-      "name": "Output",
-      "active": true,
-      "console": "false",
-      "complete": "result",
-      "x": 931.5,
-      "y": 282,
-      "wires": []
-    },
+   
     {
       "id": "9d476893.28d0b8",
       "type": "watson-tradeoff-analytics",
@@ -2546,5 +2501,105 @@
       "x": 309,
       "y": 255,
       "wires": []
-    }
+    },{
+  "id": "7619264f.477268",
+  "type": "playground",
+  "z": "987fb89b.e471f8",
+  "name": "Translation Node",
+  "url": "cloudsandbox.mybluemix.net",
+  "mode": "node",
+  "jar": "",
+  "imports": "// example\n// import com.google.gson.Gson;",
+  "code": "function process(parameters, callback) {\n    var watson = require('watson-developer-cloud');\n\t\n\tvar language_translation = watson.language_translator({\n        version: 'v2',\n        username: parameters.username,\n        password: parameters.password,\n\t});\n\t\n\tlanguage_translation.translate({\n        text: parameters.text,\n        source: parameters.fromLanguage,\n        target: parameters.toLanguage\n    }, function(err, response) {\n        if (err) {\n            console.log('error:', err);\n            if (typeof callback !== 'undefined' && typeof callback==\"function\") return callback(err);\n        } else {\n            console.log(JSON.stringify(response, null, 2));\n            if (typeof callback !== 'undefined' && typeof callback==\"function\") return callback(response);\n        }\n    });\n}",
+  "params": [{
+    "key": "username",
+    "value": ""
+  }, {
+    "key": "password",
+    "value": ""
+  }, {
+    "key": "text",
+    "value": "Where is the restroom?"
+  }, {
+    "key": "fromLanguage",
+    "value": "en"
+  }, {
+    "key": "toLanguage",
+    "value": "it"
+  }],
+  "outputs": 1,
+  "noerr": 0,
+  "x": 549,
+  "y": 326,
+  "wires": [
+    ["3aacdebf.5b1ce2"]
+  ]
+}, {
+  "id": "559ea51.3993a5c",
+  "type": "http in",
+  "z": "987fb89b.e471f8",
+  "name": "/translation_node",
+  "url": "/translation_node",
+  "method": "get",
+  "swaggerDoc": "",
+  "x": 333,
+  "y": 325,
+  "wires": [
+    ["7619264f.477268"]
+  ]
+}, {
+  "id": "bfb7f1a0.857ec",
+  "type": "playground",
+  "z": "987fb89b.e471f8",
+  "name": "Translation Java",
+  "url": "cloudsandbox.mybluemix.net",
+  "mode": "java",
+  "jar": "",
+  "imports": "import com.ibm.watson.developer_cloud.language_translation.v2.LanguageTranslation;\nimport com.ibm.watson.developer_cloud.language_translation.v2.model.Language;\nimport com.ibm.watson.developer_cloud.language_translation.v2.model.TranslationResult;",
+  "code": "    @Override\n\tprotected JsonObject process(String jsonString) {\n\t\tJsonParser parser = new JsonParser(); \n\t\tJsonObject myBean = parser.parse(jsonString).getAsJsonObject();  \n\t\t\n\t\tLanguageTranslation service = new LanguageTranslation();\n\t\t\n\t\tservice.setUsernameAndPassword(myBean.get(\"username\").getAsString(), myBean.get(\"password\").getAsString());\n\t\t\n\t\tTranslationResult translationResult = service.translate(myBean.get(\"text\").getAsString(),\n\t\t\t\tLanguage.valueOf(myBean.get(\"fromLanguage\").getAsString().toUpperCase()), Language.valueOf(myBean.get(\"toLanguage\").getAsString().toUpperCase())).execute();\n\t\t\n        JsonObject json = parser.parse(translationResult.toString()).getAsJsonObject();\n\t\t\n\t\treturn json;\n\t}",
+  "params": [{
+    "key": "username",
+    "value": ""
+  }, {
+    "key": "password",
+    "value": ""
+  }, {
+    "key": "text",
+    "value": "Where is the restroom?"
+  }, {
+    "key": "fromLanguage",
+    "value": "english"
+  }, {
+    "key": "toLanguage",
+    "value": "french"
+  }],
+  "outputs": 1,
+  "noerr": 0,
+  "x": 550,
+  "y": 438,
+  "wires": [
+    ["3aacdebf.5b1ce2"]
+  ]
+}, {
+  "id": "9c9ff82c.537fd8",
+  "type": "http in",
+  "z": "987fb89b.e471f8",
+  "name": "/translation_java",
+  "url": "/translation_java",
+  "method": "get",
+  "swaggerDoc": "",
+  "x": 344,
+  "y": 437,
+  "wires": [
+    ["bfb7f1a0.857ec"]
+  ]
+}, {
+  "id": "3aacdebf.5b1ce2",
+  "type": "http response",
+  "z": "987fb89b.e471f8",
+  "name": "",
+  "x": 768,
+  "y": 373,
+  "wires": []
+}
  ]
